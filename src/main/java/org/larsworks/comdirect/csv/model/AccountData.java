@@ -13,8 +13,8 @@ import java.util.List;
 @Data
 public class AccountData {
 
-    final AccountDataMetaData accountDataMetaData;
+    AccountDataMetaData accountDataMetaData;
 
-    final List<AccountDataEntry> accountDataEntries;
+    List<AccountDataEntry> accountDataEntries;
 
 }
