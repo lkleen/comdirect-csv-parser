@@ -15,7 +15,7 @@
           <items>
             <MenuItem id="menu-file-open" mnemonicParsing="false" text="Open" />
             <MenuItem id="menu-file-close" mnemonicParsing="false" text="Close" />
-            <MenuItem id="menu-file-import" mnemonicParsing="false" text="Import" />
+            <MenuItem id="menu-file-import" mnemonicParsing="false" text="Import" fx:id="ImportMenuItem" />
           </items>
         </Menu>
         <Menu mnemonicParsing="false" text="Help">
