@@ -3,10 +3,11 @@ package org.larsworks.comdirect.gui.controller;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import javax.swing.text.TableView;
-
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.TableView;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * Date: 7/23/13
@@ -15,14 +16,19 @@ import javafx.fxml.Initializable;
  * @author lkleen
  * @version 0.0.1
  */
+@Slf4j
 public class AccountAnalyzerController implements Initializable {
 
     @FXML
     private TableView accountDataEntriesTableView;
 
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+    }
+
+    @FXML
+    public void importData(ActionEvent event) {
+        log.info("click");
     }
 
 }
