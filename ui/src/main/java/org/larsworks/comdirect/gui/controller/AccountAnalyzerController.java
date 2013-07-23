@@ -10,6 +10,7 @@ import javafx.scene.control.TableView;
 import lombok.extern.slf4j.Slf4j;
 
 import org.larsworks.comdirect.gui.handler.AccountDataTableViewHandler;
+import org.larsworks.comdirect.gui.initializer.AccountDataEntryTableViewInitializer;
 
 /**
  * Date: 7/23/13
@@ -26,6 +27,11 @@ public class AccountAnalyzerController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        initializeTableView();
+    }
+
+    private void initializeTableView() {
+        new AccountDataEntryTableViewInitializer(accountDataEntriesTableView).init();
     }
 
     @FXML

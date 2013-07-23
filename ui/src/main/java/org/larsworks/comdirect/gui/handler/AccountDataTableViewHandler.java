@@ -33,14 +33,7 @@ public class AccountDataTableViewHandler extends AccountDataHandler {
 
     @Override
     public void handle(AccountData accountData) {
-
         ObservableList list = FXCollections.observableArrayList(testData());
-
-        TableColumn col = new TableColumn("blabla");
-        col.setMinWidth(100);
-        col.setCellValueFactory(new PropertyValueFactory<AccountDataEntry, String>("process"));
-        tableView.getColumns().addAll(col);
-
         tableView.setItems(list);
         log.info(list.toString());
     }
@@ -58,8 +51,8 @@ public class AccountDataTableViewHandler extends AccountDataHandler {
         return new AccountDataEntry(
                 new DateTime(random.nextLong()),
                 new DateTime(random.nextLong()),
-                "process",
-                "text",
+                "one",
+                "two",
                 random.nextFloat());
     }
 }
