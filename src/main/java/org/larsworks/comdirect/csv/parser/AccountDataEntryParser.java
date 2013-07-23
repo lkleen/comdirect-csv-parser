@@ -30,20 +30,20 @@ public class AccountDataEntryParser extends AbstractParser<List<AccountDataEntry
     private static final int INDEX_TEXT        = 3;
     private static final int INDEX_FLUCTUATION = 4;
 
-    private final DateTimeParser parser = new DateTimeParser();
+    private final DateTimeParser dateTimeParser = new DateTimeParser();
+    private final DecimalParser decimalParser = new DecimalParser();
 
     @Override
     protected void fillResult(List<AccountDataEntry> data, TextLine line) {
         List<String> tokens = tokenizer.tokenize(line);
-        NumberFormat format = new DecimalFormat();
         if(tokens.size() == NUM_ENTRY_TOKENS) {
             try {
                 AccountDataEntry entry = new AccountDataEntry(
-                        parser.parse(tokens.get(INDEX_POSTING)),
-                        parser.parse(tokens.get(INDEX_VALUE_DATE)),
+                        dateTimeParser.parse(tokens.get(INDEX_POSTING)),
+                        dateTimeParser.parse(tokens.get(INDEX_VALUE_DATE)),
                         tokens.get(INDEX_PROCESS),
                         tokens.get(INDEX_TEXT),
-                        format.parse(tokens.get(INDEX_FLUCTUATION)).floatValue()
+                        decimalParser.parse(tokens.get(INDEX_FLUCTUATION))
                 );
 
                 data.add(entry);
