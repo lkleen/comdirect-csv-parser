@@ -9,6 +9,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.TableView;
 import lombok.extern.slf4j.Slf4j;
 
+import org.larsworks.comdirect.gui.handler.AccountDataTableViewHandler;
+
 /**
  * Date: 7/23/13
  * Time: 3:46 PM
@@ -28,7 +30,8 @@ public class AccountAnalyzerController implements Initializable {
 
     @FXML
     public void importData(ActionEvent event) {
-        log.info("click");
+        AccountDataTableViewHandler handler = new AccountDataTableViewHandler(accountDataEntriesTableView);
+        handler.handle(null);
     }
 
 }

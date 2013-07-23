@@ -23,6 +23,11 @@
             <systemPath>${fx.home}/jfxrt.jar</systemPath>
             <scope>system</scope>
         </dependency>
+        <dependency>
+            <groupId>org.larsworks.comdirect</groupId>
+            <artifactId>core</artifactId>
+            <version>${parent.version}</version>
+        </dependency>
     </dependencies>
 
 
