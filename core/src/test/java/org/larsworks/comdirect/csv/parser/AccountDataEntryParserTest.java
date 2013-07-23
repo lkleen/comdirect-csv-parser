@@ -3,7 +3,6 @@ package org.larsworks.comdirect.csv.parser;
 import org.larsworks.comdirect.csv.io.TextFile;
 import org.larsworks.comdirect.csv.io.TextFileReader;
 import org.larsworks.comdirect.csv.model.AccountDataEntry;
-import org.larsworks.comdirect.csv.model.AccountDataMetaData;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 

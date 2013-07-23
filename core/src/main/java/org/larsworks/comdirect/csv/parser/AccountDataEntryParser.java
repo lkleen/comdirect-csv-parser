@@ -5,8 +5,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.larsworks.comdirect.csv.io.TextLine;
 import org.larsworks.comdirect.csv.model.AccountDataEntry;
 
-import java.text.DecimalFormat;
-import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -48,8 +46,8 @@ public class AccountDataEntryParser extends AbstractParser<List<AccountDataEntry
 
                 data.add(entry);
             } catch (Exception e) {
-                log.debug("could not parse line: " + line);
-                log.trace("stacktrace: ", e);
+                AccountDataEntryParser.log.debug("could not parse line: " + line);
+                AccountDataEntryParser.log.trace("stacktrace: ", e);
             }
         }
     }

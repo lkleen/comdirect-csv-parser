@@ -1,11 +1,8 @@
 package org.larsworks.comdirect.csv.parser;
 
-import org.larsworks.comdirect.csv.exceptions.TokenizerException;
 import org.larsworks.comdirect.csv.io.TextLine;
 
 import java.util.*;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 /**
  * @author Lars Kleen

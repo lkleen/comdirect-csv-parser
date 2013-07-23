@@ -1,8 +1,6 @@
 package org.larsworks.comdirect.csv.parser;
 
-import org.larsworks.comdirect.csv.io.TextFile;
 import org.larsworks.comdirect.csv.io.TextLine;
-import org.larsworks.comdirect.csv.io.TextLines;
 import org.larsworks.comdirect.csv.model.AccountDataMetaData;
 
 import java.util.List;

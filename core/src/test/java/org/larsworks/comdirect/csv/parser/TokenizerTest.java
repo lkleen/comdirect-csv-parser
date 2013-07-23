@@ -1,11 +1,9 @@
 package org.larsworks.comdirect.csv.parser;
 
 import org.larsworks.comdirect.csv.io.TextLine;
-import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 

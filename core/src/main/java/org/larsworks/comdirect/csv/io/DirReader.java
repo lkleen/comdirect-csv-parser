@@ -2,7 +2,6 @@ package org.larsworks.comdirect.csv.io;
 
 import lombok.extern.slf4j.Slf4j;
 import org.larsworks.comdirect.csv.exceptions.DirectoryReaderException;
-import sun.nio.ch.ThreadPool;
 
 import java.io.File;
 import java.io.FileFilter;
@@ -39,7 +38,7 @@ public class DirReader {
                 TextFileReader reader = new TextFileReader(new FileInputStream(file));
                 futures.add(executor.submit(reader));
             } catch (FileNotFoundException e) {
-                log.error("could not read {}", file, e);
+                DirReader.log.error("could not read {}", file, e);
             }
         }
         for(Future<TextFile> future : futures) {
