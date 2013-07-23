@@ -12,7 +12,7 @@ import javafx.scene.Parent;
  * @author lkleen
  * @version 0.0.1
  */
-public class Loader {
+public class AccountAnalyzerLoader {
 
     public Parent load() throws Exception {
         URL url = getClass().getClassLoader().getResource("gui.fxml");

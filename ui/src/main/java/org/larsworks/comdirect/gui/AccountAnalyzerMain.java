@@ -11,7 +11,7 @@ import javafx.stage.Stage;
  * @author lkleen
  * @version 0.0.1
  */
-public class MainApplication extends Application {
+public class AccountAnalyzerMain extends Application {
 
     public static void main(String... args) {
         launch(args);
@@ -19,7 +19,7 @@ public class MainApplication extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-        Scene scene = new Scene(new Loader().load());
+        Scene scene = new Scene(new AccountAnalyzerLoader().load());
         stage.setScene(scene);
         stage.show();
     }
