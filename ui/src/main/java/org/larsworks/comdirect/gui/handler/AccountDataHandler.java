@@ -1,8 +1,6 @@
 package org.larsworks.comdirect.gui.handler;
 
-import java.util.List;
-
-import org.larsworks.comdirect.csv.model.AccountData;
+import org.larsworks.comdirect.core.model.AccountData;
 
 /**
  * Date: 7/23/13

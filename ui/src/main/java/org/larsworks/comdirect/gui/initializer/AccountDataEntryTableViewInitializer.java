@@ -2,7 +2,7 @@ package org.larsworks.comdirect.gui.initializer;
 
 import javafx.scene.control.TableView;
 
-import org.larsworks.comdirect.csv.model.AccountDataEntry;
+import org.larsworks.comdirect.core.model.AccountDataEntry;
 
 /**
  * Date: 7/23/13
