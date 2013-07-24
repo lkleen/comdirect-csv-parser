@@ -1,8 +1,10 @@
 package org.larsworks.comdirect.gui.handler;
 
 import javafx.scene.chart.LineChart;
+import javafx.scene.chart.XYChart;
 
 import org.larsworks.comdirect.core.model.AccountData;
+import org.larsworks.comdirect.gui.chart.ChartDataGenerator;
 
 /**
  * Date: 7/23/13
@@ -13,7 +15,9 @@ import org.larsworks.comdirect.core.model.AccountData;
  */
 public class AccountDataLineChartHandler extends AccountDataHandler {
 
-    private final LineChart lineChart;
+    final LineChart lineChart;
+    final ChartDataGenerator dataGenerator = new ChartDataGenerator();
+
 
     public AccountDataLineChartHandler(LineChart lineChart) {
         this.lineChart = lineChart;
@@ -21,6 +25,10 @@ public class AccountDataLineChartHandler extends AccountDataHandler {
 
     @Override
     public void handle(AccountData accountData) {
-        //To change body of implemented methods use File | Settings | File Templates.
+        XYChart.Series<String, Float> series = new XYChart.Series<String, Float>();
+        series.getData().addAll(dataGenerator.generateFrom(accountData));
+        lineChart.setData(dataGenerator.emptySeries());
+        lineChart.getData().add(series);
     }
+
 }
