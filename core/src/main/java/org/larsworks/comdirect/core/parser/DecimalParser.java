@@ -15,12 +15,11 @@ import org.larsworks.comdirect.core.exceptions.DecimalParserException;
  */
 public class DecimalParser {
 
-    private static final String pattern = "#.##0,00;";
-
     private final NumberFormat format = NumberFormat.getNumberInstance(Locale.GERMANY);
 
     public float  parse(String decimal) throws DecimalParserException {
         try {
+            decimal = decimal.replace("+","");
             return format.parse(decimal).floatValue();
         } catch (ParseException e) {
             throw new DecimalParserException(e);

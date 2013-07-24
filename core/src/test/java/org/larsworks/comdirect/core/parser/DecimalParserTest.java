@@ -30,6 +30,7 @@ public class DecimalParserTest {
         parameters.add(new Object[] {"0,00", 0f});
         parameters.add(new Object[] {"-1.233,12", -1233.12f});
         parameters.add(new Object[] {"-1231,12", -1231.12f});
+        parameters.add(new Object[] {"+1231,12", 1231.12f});
         parameters.add(new Object[] {"987.987.987", 987987987f});
         parameters.add(new Object[] {"9.000.000.000,01", 9000000000.01f});
         return parameters.toArray(new Object[parameters.size()][]);
