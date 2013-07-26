@@ -1,5 +1,6 @@
 package org.larsworks.comdirect.core.operations;
 
+import lombok.extern.slf4j.Slf4j;
 import org.larsworks.comdirect.core.model.AccountData;
 import org.larsworks.comdirect.core.parser.DecimalParser;
 
@@ -10,6 +11,7 @@ import org.larsworks.comdirect.core.parser.DecimalParser;
  * @author lkleen
  * @version 0.0.1
  */
+@Slf4j
 public class AccountDataAnalyzer {
 
     private static final String KEY_INITIAL_VALUE = "Alter Kontostand";
@@ -24,7 +26,12 @@ public class AccountDataAnalyzer {
 
     public float getInitialValue() {
         String value = accountData.getAccountDataMetaData().getMetaData().get(KEY_INITIAL_VALUE);
-        return parser.parse(value);
+        if(value == null) {
+            log.warn("could not parse initial value. returning 0");
+            return 0F;
+        } else {
+            return parser.parse(value);
+        }
     }
 
 }

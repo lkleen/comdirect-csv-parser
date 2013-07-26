@@ -67,6 +67,6 @@ public class ImportAction extends MenuItemAction {
     }
 
     private String getPath() {
-        return "C:\\Users\\lars\\workspace\\comdirect-csv-parser\\core\\src\\test\\resources";
+        return "C:/Users/lars/workspace/comdirect-csv-parser/core/src/test/resources";
     }
 }
