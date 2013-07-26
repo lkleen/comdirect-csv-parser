@@ -12,7 +12,7 @@
     <artifactId>ui</artifactId>
 
     <properties>
-        <fx.home>/usr/local/java/jdk1.7.0_15/jre/lib</fx.home>
+        <fx.home>${env.JAVA_HOME}/jre/lib</fx.home>
     </properties>
 
     <dependencies>
