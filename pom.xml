@@ -4,9 +4,15 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>org.larsworks</groupId>
-    <artifactId>comdirect-csv-parser</artifactId>
+    <groupId>org.larsworks.comdirect</groupId>
+    <artifactId>parent</artifactId>
     <version>0.0.1-SNAPSHOT</version>
+    <packaging>pom</packaging>
+
+    <modules>
+        <module>core</module>
+        <module>ui</module>
+    </modules>
 
     <properties>
         <logback.version>1.0.7</logback.version>
@@ -15,16 +21,11 @@
 
 
     <dependencies>
+
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <version>0.11.6</version>
-        </dependency>
-
-        <dependency>
-            <groupId>joda-time</groupId>
-            <artifactId>joda-time</artifactId>
-            <version>2.2</version>
         </dependency>
 
         <!-- LOGGING -->
