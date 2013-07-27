@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.paint.*?>
 
-<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml" fx:controller="org.larsworks.comdirect.gui.controller.AccountAnalyzerController">
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="org.larsworks.comdirect.gui.controller.AccountAnalyzerController">
   <children>
     <MenuBar id="menu" prefWidth="600.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
       <menus>
@@ -15,7 +15,7 @@
           <items>
             <MenuItem id="menu-file-open" mnemonicParsing="false" text="Open" />
             <MenuItem id="menu-file-close" mnemonicParsing="false" text="Close" />
-            <MenuItem id="menu-file-import" mnemonicParsing="false" text="Import" fx:id="importMenuItem" onAction="#importData"/>
+            <MenuItem id="menu-file-import" mnemonicParsing="false" onAction="#importData" text="Import" fx:id="importMenuItem" />
           </items>
         </Menu>
         <Menu mnemonicParsing="false" text="Help">
@@ -27,11 +27,27 @@
     </MenuBar>
     <TabPane prefHeight="370.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="30.0">
       <tabs>
-        <Tab text="Chart">
+        <Tab text="Bar Chart">
           <content>
             <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
               <children>
-                <LineChart id="LineChart" fx:id="accountDataEntriesLineChart" prefHeight="329.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                <StackedBarChart fx:id="accountDataBarChart" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <xAxis>
+                    <CategoryAxis side="BOTTOM" />
+                  </xAxis>
+                  <yAxis>
+                    <NumberAxis side="LEFT" />
+                  </yAxis>
+                </StackedBarChart>
+              </children>
+            </AnchorPane>
+          </content>
+        </Tab>
+        <Tab text="Line Chart">
+          <content>
+            <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+              <children>
+                <LineChart fx:id="accountDataLineChart" prefHeight="329.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                   <xAxis>
                     <CategoryAxis side="BOTTOM" />
                   </xAxis>
@@ -47,7 +63,7 @@
           <content>
             <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
               <children>
-                <TableView id="dataTableView" fx:id="accountDataEntriesTableView" editable="false" prefHeight="329.0" prefWidth="600.0" tableMenuButtonVisible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                <TableView id="dataTableView" fx:id="accountDataTableView" editable="false" prefHeight="329.0" prefWidth="600.0" tableMenuButtonVisible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
               </children>
             </AnchorPane>
           </content>

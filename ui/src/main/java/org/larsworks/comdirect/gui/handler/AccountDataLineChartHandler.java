@@ -4,7 +4,7 @@ import javafx.scene.chart.LineChart;
 import javafx.scene.chart.XYChart;
 
 import org.larsworks.comdirect.core.model.AccountData;
-import org.larsworks.comdirect.gui.chart.ChartDataGenerator;
+import org.larsworks.comdirect.gui.chart.LineChartDataGenerator;
 
 /**
  * Date: 7/23/13
@@ -16,7 +16,7 @@ import org.larsworks.comdirect.gui.chart.ChartDataGenerator;
 public class AccountDataLineChartHandler extends AccountDataHandler {
 
     final LineChart lineChart;
-    final ChartDataGenerator dataGenerator = new ChartDataGenerator();
+    final LineChartDataGenerator dataGenerator = new LineChartDataGenerator();
 
 
     public AccountDataLineChartHandler(LineChart lineChart) {

@@ -19,7 +19,7 @@ import org.larsworks.comdirect.core.operations.AccountDataAnalyzer;
  * @author lkleen
  * @version 0.0.1
  */
-public class ChartDataGenerator {
+public class LineChartDataGenerator {
 
     public List<XYChart.Data<String, Float>> generateFrom(AccountData accountData) {
         AccountDataAnalyzer analyzer = new AccountDataAnalyzer(accountData);

@@ -10,7 +10,6 @@ import javafx.scene.chart.LineChart;
 import javafx.scene.control.TableView;
 import lombok.extern.slf4j.Slf4j;
 
-import org.larsworks.comdirect.gui.handler.AccountDataTableViewHandler;
 import org.larsworks.comdirect.gui.initializer.AccountDataEntryTableViewInitializer;
 import org.larsworks.comdirect.gui.menu.file.ImportAction;
 
@@ -25,10 +24,10 @@ import org.larsworks.comdirect.gui.menu.file.ImportAction;
 public class AccountAnalyzerController implements Initializable {
 
     @FXML
-    private TableView accountDataEntriesTableView;
+    private TableView accountDataTableView;
 
     @FXML
-    private LineChart accountDataEntriesLineChart;
+    private LineChart accountDataLineChart;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -36,12 +35,12 @@ public class AccountAnalyzerController implements Initializable {
     }
 
     private void initializeTableView() {
-        new AccountDataEntryTableViewInitializer(accountDataEntriesTableView).init();
+        new AccountDataEntryTableViewInitializer(accountDataTableView).init();
     }
 
     @FXML
     public void importData(ActionEvent event) {
-        new ImportAction(accountDataEntriesTableView, accountDataEntriesLineChart).execute();
+        new ImportAction(accountDataTableView, accountDataLineChart).execute();
     }
 
 }

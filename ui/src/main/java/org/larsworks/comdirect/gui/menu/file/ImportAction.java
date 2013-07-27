@@ -43,6 +43,11 @@ public class ImportAction extends MenuItemAction {
         AccountData accountData = merge(accountDataList);
         updateTableViewWith(accountData);
         updateLineChartWith(accountData);
+        updateBarChartWith(accountData);
+    }
+
+    private void updateBarChartWith(AccountData accountData) {
+
     }
 
     private void updateLineChartWith(AccountData accountData) {
