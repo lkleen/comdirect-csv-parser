@@ -1,6 +1,7 @@
 package org.larsworks.comdirect.core.statistics;
 
 import java.util.List;
+import java.util.SortedSet;
 
 import lombok.Data;
 
@@ -14,6 +15,6 @@ import lombok.Data;
 @Data
 public class AccountingStatisticsData extends Statistic.Data {
 
-    private List<AccountingPeriod> periods;
+    private SortedSet<AccountingPeriod> periods;
 
 }

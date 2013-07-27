@@ -2,6 +2,7 @@ package org.larsworks.comdirect.core.model;
 
 import lombok.Data;
 import org.joda.time.DateTime;
+import org.larsworks.comdirect.core.statistics.Category;
 
 /**
  * @author Lars Kleen
@@ -21,5 +22,7 @@ public class AccountDataEntry {
     final String text;
 
     final float fluctuation;
+
+    Category category;
 
 }
