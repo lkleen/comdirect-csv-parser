@@ -1,17 +1,22 @@
 package org.larsworks.comdirect.gui.menu.file;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
 import javafx.scene.chart.LineChart;
 import javafx.scene.control.TableView;
 
+import javafx.stage.DirectoryChooser;
+import javafx.stage.DirectoryChooserBuilder;
+import javafx.stage.Window;
 import org.larsworks.comdirect.core.io.CsvFileFilter;
 import org.larsworks.comdirect.core.io.DirReader;
 import org.larsworks.comdirect.core.io.TextFile;
 import org.larsworks.comdirect.core.model.AccountData;
 import org.larsworks.comdirect.core.operations.AccountDataMerger;
 import org.larsworks.comdirect.core.parser.AccountDataParser;
+import org.larsworks.comdirect.gui.dialog.DirectoryChooserDialog;
 import org.larsworks.comdirect.gui.handler.AccountDataLineChartHandler;
 import org.larsworks.comdirect.gui.handler.AccountDataTableViewHandler;
 
@@ -26,20 +31,21 @@ public class ImportAction extends MenuItemAction {
 
     final AccountDataLineChartHandler lineChartHandler;
     final AccountDataTableViewHandler tableViewHandler;
+    final DirectoryChooserDialog directoryChooserDialog;
 
     final DirReader dirReader = new DirReader();
     final AccountDataParser parser = new AccountDataParser();
     final AccountDataMerger merger = new AccountDataMerger();
 
-    public ImportAction(TableView tableView, LineChart lineChart) {
+    public ImportAction(Window window, TableView tableView, LineChart lineChart) {
+        directoryChooserDialog = new DirectoryChooserDialog(window);
         lineChartHandler = new AccountDataLineChartHandler(lineChart);
         tableViewHandler = new AccountDataTableViewHandler(tableView);
     }
 
     @Override
     public void execute() {
-        String path = getPath();
-        List<AccountData> accountDataList = parseFilesFrom(path);
+        List<AccountData> accountDataList = parseFilesFrom(getPath());
         AccountData accountData = merge(accountDataList);
         updateTableViewWith(accountData);
         updateLineChartWith(accountData);
@@ -62,8 +68,8 @@ public class ImportAction extends MenuItemAction {
         return merger.merge(accountDataList);
     }
 
-    private List<AccountData> parseFilesFrom(String path) {
-        List<TextFile> files = dirReader.readDir(path, new CsvFileFilter());
+    private List<AccountData> parseFilesFrom(File dir) {
+        List<TextFile> files = dirReader.readDir(dir.getAbsolutePath(), new CsvFileFilter());
         List<AccountData> accountDatas = new ArrayList<AccountData>(files.size());
         for(TextFile file : files) {
             accountDatas.add(parser.parse(file));
@@ -71,7 +77,7 @@ public class ImportAction extends MenuItemAction {
         return accountDatas;
     }
 
-    private String getPath() {
-        return "C:/Users/lars/workspace/comdirect-csv-parser/core/src/test/resources";
+    private File getPath() {
+        return directoryChooserDialog.show();
     }
 }

@@ -7,6 +7,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.chart.XYChart;
 
+import javafx.scene.control.Tooltip;
 import org.joda.time.format.DateTimeFormat;
 import org.larsworks.comdirect.core.model.AccountData;
 import org.larsworks.comdirect.core.model.AccountDataEntry;
@@ -28,7 +29,10 @@ public class LineChartDataGenerator {
         for(AccountDataEntry entry : accountData.getAccountDataEntries()) {
             String date = entry.getValueDate().toString(DateTimeFormat.shortDate());
             balance += entry.getFluctuation();
-            list.add(new XYChart.Data<String, Float>(date, balance));
+            XYChart.Data<String, Float> data = new XYChart.Data<String, Float>(date, balance);
+            data.setExtraValue(entry);
+            Tooltip.install(data.getNode(), new Tooltip("asd"));
+            list.add(data);
         }
         return list;
     }

@@ -11,9 +11,9 @@ import org.larsworks.comdirect.core.model.AccountDataEntry;
  * @author lkleen
  * @version 0.0.1
  */
-public class AccountDataEntryTableViewInitializer extends Initializer<TableView> {
+public class AccountDataTableViewInitializer extends Initializer<TableView> {
 
-    public AccountDataEntryTableViewInitializer(TableView tableView) {
+    public AccountDataTableViewInitializer(TableView tableView) {
         super(tableView);
     }
 

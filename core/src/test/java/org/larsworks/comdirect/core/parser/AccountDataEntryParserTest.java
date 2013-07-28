@@ -12,6 +12,7 @@ import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import static org.testng.Assert.assertEquals;
 
@@ -43,7 +44,7 @@ public class AccountDataEntryParserTest {
     public void test() throws Exception {
         InputStream testData = getClass().getClassLoader().getResourceAsStream("umsaetze_8115990_20130526-1520.testdata.csv");
         TextFile file = new TextFileReader(testData).call();
-        List<AccountDataEntry> data = entryParser.parse(file);
+        Set<AccountDataEntry> data = entryParser.parse(file);
         assertEquals(data, expected);
     }
 

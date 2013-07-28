@@ -3,6 +3,7 @@ package org.larsworks.comdirect.core.model;
 import lombok.Data;
 
 import java.util.List;
+import java.util.SortedSet;
 
 /**
  * @author Lars Kleen
@@ -15,6 +16,6 @@ public class AccountData {
 
     AccountDataMetaData accountDataMetaData;
 
-    List<AccountDataEntry> accountDataEntries;
+    SortedSet<AccountDataEntry> accountDataEntries;
 
 }

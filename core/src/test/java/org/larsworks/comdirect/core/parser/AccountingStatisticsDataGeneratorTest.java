@@ -30,7 +30,6 @@ public class AccountingStatisticsDataGeneratorTest {
 
     @Test
     public void test() {
-        AccountingStatisticsData test = generator.generate();
         assertEquals(generator.generate(), expected);
     }
 
@@ -62,8 +61,8 @@ public class AccountingStatisticsDataGeneratorTest {
         return data;
     }
 
-    private List<AccountDataEntry> generateAccountDataEntries() {
-        List<AccountDataEntry> entries = new ArrayList<AccountDataEntry>();
+    private SortedSet<AccountDataEntry> generateAccountDataEntries() {
+        SortedSet<AccountDataEntry> entries = new TreeSet<AccountDataEntry>();
         entries.add(newEntry(december2012(), -1F));
         entries.add(newEntry(december2012(),  2F));
         entries.add(newEntry(january2013(),  -1F));
@@ -80,6 +79,6 @@ public class AccountingStatisticsDataGeneratorTest {
     }
 
     private AccountDataEntry newEntry(DateTime valueDate, float fluctuation) {
-        return new AccountDataEntry(null, valueDate, "", "", fluctuation);
+        return new AccountDataEntry(valueDate, valueDate, "", "", fluctuation);
     }
 }

@@ -1,9 +1,9 @@
 package org.larsworks.comdirect.core.statistics;
 
 import lombok.Data;
+import lombok.NonNull;
 import org.joda.time.DateTime;
 
-import javax.validation.constraints.NotNull;
 import java.util.SortedSet;
 
 /**
@@ -16,13 +16,13 @@ import java.util.SortedSet;
 @Data
 public class AccountingPeriod implements Comparable<AccountingPeriod> {
 
-    @NotNull
+    @NonNull
     final DateTime.Property month;
 
-    @NotNull
+    @NonNull
     final SortedSet<Withdraw> withdraws;
 
-    @NotNull
+    @NonNull
     final SortedSet<Deposit> deposits;
 
     @Override

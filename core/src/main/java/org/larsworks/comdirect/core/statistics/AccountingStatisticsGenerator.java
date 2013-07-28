@@ -26,7 +26,7 @@ public class AccountingStatisticsGenerator implements Generator<AccountingStatis
         return generateAccountingStatisticsDataFrom(accountData.getAccountDataEntries());
     }
 
-    private AccountingStatisticsData generateAccountingStatisticsDataFrom(List<AccountDataEntry> entries) {
+    private AccountingStatisticsData generateAccountingStatisticsDataFrom(Collection<AccountDataEntry> entries) {
         Map<DateTime.Property, AccountingPeriod> periods = new HashMap<DateTime.Property, AccountingPeriod>();
         for(AccountDataEntry entry : entries) {
             DateTime.Property month = entry.getValueDate().monthOfYear();

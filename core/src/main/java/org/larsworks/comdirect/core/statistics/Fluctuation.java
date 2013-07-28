@@ -1,8 +1,7 @@
 package org.larsworks.comdirect.core.statistics;
 
+import lombok.NonNull;
 import org.joda.time.DateTime;
-
-import javax.validation.constraints.NotNull;
 
 /**
  * @author Lars Kleen
@@ -12,7 +11,7 @@ import javax.validation.constraints.NotNull;
  */
 public abstract class Fluctuation implements Comparable<Fluctuation> {
 
-    @NotNull
+    @NonNull
     final DateTime valueDate;
 
     final float value;
@@ -26,11 +25,11 @@ public abstract class Fluctuation implements Comparable<Fluctuation> {
 
     @Override
     public int compareTo(Fluctuation that) {
-        if(this.category == null) {
+        if (this.category == null) {
             return -1;
         }
         int val = this.category.compareTo(that.category);
-        if(val == 0) {
+        if (val == 0) {
             return valueDate.compareTo(that.valueDate);
         } else {
             return val;

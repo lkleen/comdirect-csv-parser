@@ -7,6 +7,8 @@ import org.larsworks.comdirect.core.model.AccountDataEntry;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.SortedSet;
+import java.util.TreeSet;
 
 /**
  * @author Lars Kleen
@@ -15,26 +17,26 @@ import java.util.List;
  *        Time: 17:00
  */
 @Slf4j
-public class AccountDataEntryParser extends AbstractParser<List<AccountDataEntry>> {
+public class AccountDataEntryParser extends AbstractParser<SortedSet<AccountDataEntry>> {
 
     /**
      * number of tokens for account data entries
      */
     private static final int NUM_ENTRY_TOKENS = 5;
 
-    private static final int INDEX_POSTING     = 0;
-    private static final int INDEX_VALUE_DATE  = 1;
-    private static final int INDEX_PROCESS     = 2;
-    private static final int INDEX_TEXT        = 3;
+    private static final int INDEX_POSTING = 0;
+    private static final int INDEX_VALUE_DATE = 1;
+    private static final int INDEX_PROCESS = 2;
+    private static final int INDEX_TEXT = 3;
     private static final int INDEX_FLUCTUATION = 4;
 
     private final DateTimeParser dateTimeParser = new DateTimeParser();
     private final DecimalParser decimalParser = new DecimalParser();
 
     @Override
-    protected void fillResult(List<AccountDataEntry> data, TextLine line) {
+    protected void fillResult(SortedSet<AccountDataEntry> data, TextLine line) {
         List<String> tokens = tokenizer.tokenize(line);
-        if(tokens.size() == NUM_ENTRY_TOKENS) {
+        if (tokens.size() == NUM_ENTRY_TOKENS) {
             try {
                 AccountDataEntry entry = new AccountDataEntry(
                         dateTimeParser.parse(tokens.get(INDEX_POSTING)),
@@ -53,7 +55,7 @@ public class AccountDataEntryParser extends AbstractParser<List<AccountDataEntry
     }
 
     @Override
-    protected List<AccountDataEntry> getInstance() {
-        return new ArrayList<AccountDataEntry>();
+    protected SortedSet<AccountDataEntry> getInstance() {
+        return new TreeSet<AccountDataEntry>();
     }
 }

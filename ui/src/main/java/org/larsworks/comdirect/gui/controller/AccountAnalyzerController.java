@@ -6,11 +6,16 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.chart.LineChart;
 import javafx.scene.control.TableView;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
+import javafx.stage.Window;
 import lombok.extern.slf4j.Slf4j;
 
-import org.larsworks.comdirect.gui.initializer.AccountDataEntryTableViewInitializer;
+import org.larsworks.comdirect.gui.initializer.AccountDataTableViewInitializer;
 import org.larsworks.comdirect.gui.menu.file.ImportAction;
 
 /**
@@ -29,18 +34,22 @@ public class AccountAnalyzerController implements Initializable {
     @FXML
     private LineChart accountDataLineChart;
 
+    @FXML
+    private AnchorPane mainPane;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         initializeTableView();
     }
 
     private void initializeTableView() {
-        new AccountDataEntryTableViewInitializer(accountDataTableView).init();
+        new AccountDataTableViewInitializer(accountDataTableView).init();
     }
 
     @FXML
     public void importData(ActionEvent event) {
-        new ImportAction(accountDataTableView, accountDataLineChart).execute();
+        Window window = mainPane.getScene().getWindow();
+        new ImportAction(window, accountDataTableView, accountDataLineChart).execute();
     }
 
 }
