@@ -9,12 +9,14 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.chart.LineChart;
+import javafx.scene.chart.StackedBarChart;
 import javafx.scene.control.TableView;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.stage.Window;
 import lombok.extern.slf4j.Slf4j;
 
+import org.larsworks.comdirect.gui.initializer.AccountDataBarChartInitializer;
 import org.larsworks.comdirect.gui.initializer.AccountDataTableViewInitializer;
 import org.larsworks.comdirect.gui.menu.file.ImportAction;
 
@@ -35,11 +37,20 @@ public class AccountAnalyzerController implements Initializable {
     private LineChart accountDataLineChart;
 
     @FXML
+    private StackedBarChart accountDataBarChart;
+
+    @FXML
     private AnchorPane mainPane;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         initializeTableView();
+        initializeBarChart();
+    }
+
+    private void initializeBarChart() {
+        new AccountDataBarChartInitializer(accountDataBarChart).init();
+
     }
 
     private void initializeTableView() {

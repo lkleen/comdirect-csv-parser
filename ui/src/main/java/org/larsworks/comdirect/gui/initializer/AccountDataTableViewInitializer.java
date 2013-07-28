@@ -19,6 +19,6 @@ public class AccountDataTableViewInitializer extends Initializer<TableView> {
 
     @Override
     public void init() {
-        new TableColumnInitializer<AccountDataEntry>(t).init(AccountDataEntry.class);
+        new TableColumnInitializer<AccountDataEntry>(initializable).init(AccountDataEntry.class);
     }
 }

@@ -9,10 +9,10 @@ package org.larsworks.comdirect.gui.initializer;
  */
 public abstract class Initializer<T> {
 
-    protected final T t;
+    protected final T initializable;
 
-    public Initializer(T t) {
-        this.t = t;
+    public Initializer(T initializable) {
+        this.initializable = initializable;
     }
 
     public abstract void init();
