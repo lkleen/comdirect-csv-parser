@@ -60,7 +60,7 @@ public class AccountAnalyzerController implements Initializable {
     @FXML
     public void importData(ActionEvent event) {
         Window window = mainPane.getScene().getWindow();
-        new ImportAction(window, accountDataTableView, accountDataLineChart).execute();
+        new ImportAction(window, accountDataTableView, accountDataLineChart, accountDataBarChart).execute();
     }
 
 }

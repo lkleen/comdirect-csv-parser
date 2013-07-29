@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javafx.scene.chart.LineChart;
+import javafx.scene.chart.StackedBarChart;
 import javafx.scene.control.TableView;
 
 import javafx.stage.DirectoryChooser;
@@ -17,6 +18,7 @@ import org.larsworks.comdirect.core.model.AccountData;
 import org.larsworks.comdirect.core.operations.AccountDataMerger;
 import org.larsworks.comdirect.core.parser.AccountDataParser;
 import org.larsworks.comdirect.gui.dialog.DirectoryChooserDialog;
+import org.larsworks.comdirect.gui.handler.AccountDataBarChartHandler;
 import org.larsworks.comdirect.gui.handler.AccountDataLineChartHandler;
 import org.larsworks.comdirect.gui.handler.AccountDataTableViewHandler;
 
@@ -31,16 +33,18 @@ public class ImportAction extends MenuItemAction {
 
     final AccountDataLineChartHandler lineChartHandler;
     final AccountDataTableViewHandler tableViewHandler;
+    final AccountDataBarChartHandler barChartHandler;
     final DirectoryChooserDialog directoryChooserDialog;
 
     final DirReader dirReader = new DirReader();
     final AccountDataParser parser = new AccountDataParser();
     final AccountDataMerger merger = new AccountDataMerger();
 
-    public ImportAction(Window window, TableView tableView, LineChart lineChart) {
+    public ImportAction(Window window, TableView tableView, LineChart lineChart, StackedBarChart barChart) {
         directoryChooserDialog = new DirectoryChooserDialog(window);
         lineChartHandler = new AccountDataLineChartHandler(lineChart);
         tableViewHandler = new AccountDataTableViewHandler(tableView);
+        barChartHandler  = new AccountDataBarChartHandler(barChart);
     }
 
     @Override
@@ -53,7 +57,7 @@ public class ImportAction extends MenuItemAction {
     }
 
     private void updateBarChartWith(AccountData accountData) {
-
+        barChartHandler.handle(accountData);
     }
 
     private void updateLineChartWith(AccountData accountData) {

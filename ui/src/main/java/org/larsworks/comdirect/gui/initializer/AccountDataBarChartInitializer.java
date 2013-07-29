@@ -19,6 +19,6 @@ public class AccountDataBarChartInitializer extends Initializer<StackedBarChart>
     @Override
     public void init() {
         CategoryAxis xAxis = (CategoryAxis) initializable.getXAxis();
-        xAxis.setCategories(FXCollections.<String>observableArrayList(new String[]{"jan", "feb"}));
+        xAxis.setCategories(FXCollections.<String>observableArrayList(new String[]{"deposits", "withdraws"}));
     }
 }

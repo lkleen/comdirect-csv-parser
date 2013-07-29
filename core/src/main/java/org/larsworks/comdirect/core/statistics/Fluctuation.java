@@ -1,5 +1,6 @@
 package org.larsworks.comdirect.core.statistics;
 
+import lombok.Getter;
 import lombok.NonNull;
 import org.joda.time.DateTime;
 
@@ -9,6 +10,7 @@ import org.joda.time.DateTime;
  *        Date: 27.07.13
  *        Time: 17:25
  */
+@Getter
 public abstract class Fluctuation implements Comparable<Fluctuation> {
 
     @NonNull
