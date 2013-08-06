@@ -5,11 +5,15 @@ import lombok.NonNull;
 import org.joda.time.DateTime;
 import org.larsworks.comdirect.core.statistics.Category;
 
+import java.text.NumberFormat;
+import java.util.Locale;
+
 /**
  * @author Lars Kleen
  * @since 0.0.1
  *        Date: 26.05.13
  *        Time: 16:36
+ *        TODO: add and process ignore annotation for fields not related to the entry data
  */
 @Data
 public class AccountDataEntry implements Comparable<AccountDataEntry> {
@@ -67,5 +71,16 @@ public class AccountDataEntry implements Comparable<AccountDataEntry> {
         result = 31 * result + text.hashCode();
         result = 31 * result + (fluctuation != +0.0f ? Float.floatToIntBits(fluctuation) : 0);
         return result;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        NumberFormat format = NumberFormat.getCurrencyInstance(Locale.GERMANY);
+        sb
+                .append(format.format(fluctuation))
+                .append(" | ")
+                .append(text);
+        return sb.toString();
     }
 }
