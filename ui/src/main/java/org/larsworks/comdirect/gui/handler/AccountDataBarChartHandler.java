@@ -6,14 +6,12 @@ import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.StackedBarChart;
 import javafx.scene.chart.XYChart;
 import org.larsworks.comdirect.core.model.AccountData;
-import org.larsworks.comdirect.core.statistics.AccountingPeriod;
-import org.larsworks.comdirect.core.statistics.AccountingStatistic;
-import org.larsworks.comdirect.core.statistics.AccountingStatisticsData;
-import org.larsworks.comdirect.core.statistics.Fluctuation;
+import org.larsworks.comdirect.core.statistics.*;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.SortedSet;
 
 /**
  * @author Lars Kleen
@@ -37,10 +35,19 @@ public class AccountDataBarChartHandler extends AccountDataHandler {
         for(AccountingPeriod period : data.getPeriods()) {
             XYChart.Series<String, Float> series = new XYChart.Series<String, Float>();
             series.setName(period.getMonth().getAsText());
-            series.getData().addAll(fluctuationsFrom("deposits", period.getDeposits()));
-            series.getData().addAll(fluctuationsFrom("withdraws", period.getWithdraws()));
+            series.getData().add(fluctuationFrom("deposits", period.getDeposits()));
+            series.getData().add(fluctuationFrom("withdraws", period.getWithdraws()));
             barChart.getData().add(series);
         }
+    }
+
+    private XYChart.Data<String, Float> fluctuationFrom(String category, Collection<? extends Fluctuation> fluctuations) {
+        float sum = 0F;
+        for(Fluctuation fluctuation : fluctuations) {
+            float value = fluctuation.getValue();
+            sum += value < 0 ? -value : value;
+        }
+        return new XYChart.Data<String, Float>(category, sum);
     }
 
     private Collection<? extends XYChart.Data<String, Float>> fluctuationsFrom(String category, Collection<? extends Fluctuation> fluctuations) {
