@@ -33,7 +33,7 @@ public class AccountDataTableViewHandler extends AccountDataHandler {
     public void handle(AccountData accountData) {
         ObservableList list = FXCollections.observableArrayList(accountData.getAccountDataEntries());
         tableView.setItems(list);
-        log.info(list.toString());
+        log.debug(list.toString());
     }
 
 }

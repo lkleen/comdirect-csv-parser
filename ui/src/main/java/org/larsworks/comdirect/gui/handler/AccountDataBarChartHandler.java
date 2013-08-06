@@ -1,8 +1,7 @@
 package org.larsworks.comdirect.gui.handler;
 
 import javafx.collections.FXCollections;
-import javafx.scene.chart.BarChart;
-import javafx.scene.chart.CategoryAxis;
+import javafx.collections.ObservableList;
 import javafx.scene.chart.StackedBarChart;
 import javafx.scene.chart.XYChart;
 import org.larsworks.comdirect.core.model.AccountData;
@@ -11,7 +10,6 @@ import org.larsworks.comdirect.core.statistics.*;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-import java.util.SortedSet;
 
 /**
  * @author Lars Kleen
@@ -29,16 +27,26 @@ public class AccountDataBarChartHandler extends AccountDataHandler {
 
     @Override
     public void handle(AccountData accountData) {
+        clearChart();
+        fillChartWith(accountData);
+    }
+
+    private void fillChartWith(AccountData accountData) {
+        List<XYChart.Series<String, Float>> list = new ArrayList<XYChart.Series<String, Float>>();
         AccountingStatistic statistic = new AccountingStatistic(accountData);
         AccountingStatisticsData data = statistic.generator().generate();
-
         for(AccountingPeriod period : data.getPeriods()) {
             XYChart.Series<String, Float> series = new XYChart.Series<String, Float>();
             series.setName(period.getMonth().getAsText());
             series.getData().add(fluctuationFrom("deposits", period.getDeposits()));
             series.getData().add(fluctuationFrom("withdraws", period.getWithdraws()));
-            barChart.getData().add(series);
+            list.add(series);
         }
+        barChart.setData(FXCollections.observableArrayList(list));
+    }
+
+    private void clearChart() {
+        barChart.setData(FXCollections.emptyObservableList());
     }
 
     private XYChart.Data<String, Float> fluctuationFrom(String category, Collection<? extends Fluctuation> fluctuations) {
@@ -50,13 +58,4 @@ public class AccountDataBarChartHandler extends AccountDataHandler {
         return new XYChart.Data<String, Float>(category, sum);
     }
 
-    private Collection<? extends XYChart.Data<String, Float>> fluctuationsFrom(String category, Collection<? extends Fluctuation> fluctuations) {
-        Collection<XYChart.Data<String, Float>> list  = FXCollections.observableArrayList();
-        for(Fluctuation fluctuation : fluctuations) {
-            float value = fluctuation.getValue();
-            value = value < 0 ? -value : value;
-            list.add(new XYChart.Data<String, Float>(category, value));
-        }
-        return list;
-    }
 }
