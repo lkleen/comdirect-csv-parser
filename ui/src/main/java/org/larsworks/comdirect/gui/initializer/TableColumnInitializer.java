@@ -5,6 +5,7 @@ import java.lang.reflect.Field;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import org.larsworks.comdirect.core.annotations.view.Ignore;
 
 /**
  * Date: 7/23/13
@@ -23,9 +24,11 @@ public class TableColumnInitializer<T> {
 
     public void init(Class<T> clazz) {
         for(Field field : clazz.getDeclaredFields()) {
+            if (field.isAnnotationPresent(Ignore.class)) {
+                continue;
+            }
             String name = field.getName();
             TableColumn col = new TableColumn(name);
-            col.setMinWidth(100);
             col.setCellValueFactory(new PropertyValueFactory<T, String>(name));
             tableView.getColumns().add(col);
         }

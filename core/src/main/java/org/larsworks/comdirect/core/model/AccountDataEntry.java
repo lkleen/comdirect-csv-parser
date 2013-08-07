@@ -3,6 +3,7 @@ package org.larsworks.comdirect.core.model;
 import lombok.Data;
 import lombok.NonNull;
 import org.joda.time.DateTime;
+import org.larsworks.comdirect.core.annotations.view.Ignore;
 import org.larsworks.comdirect.core.statistics.Category;
 
 import java.text.NumberFormat;
@@ -18,8 +19,10 @@ import java.util.Locale;
 @Data
 public class AccountDataEntry implements Comparable<AccountDataEntry> {
 
+    @Ignore
     static long increment = 0;
 
+    @Ignore
     final long id = increment++;
 
     @NonNull
