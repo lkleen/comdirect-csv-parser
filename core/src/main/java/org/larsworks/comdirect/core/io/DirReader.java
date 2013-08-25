@@ -35,7 +35,7 @@ public class DirReader {
         List<TextFile> result = new ArrayList<TextFile>();
         for (File file : files) {
             try {
-                TextFileReader reader = new TextFileReader(new FileInputStream(file));
+                TextFileReaderCallable reader = new TextFileReaderCallable(new FileInputStream(file));
                 futures.add(executor.submit(reader));
             } catch (FileNotFoundException e) {
                 DirReader.log.error("could not read {}", file, e);

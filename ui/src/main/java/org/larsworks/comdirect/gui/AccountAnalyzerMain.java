@@ -3,6 +3,7 @@ package org.larsworks.comdirect.gui;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import org.larsworks.comdirect.gui.windows.MainWindow;
 
 /**
  * Date: 7/23/13
@@ -19,7 +20,7 @@ public class AccountAnalyzerMain extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-        Scene scene = new Scene(new AccountAnalyzerLoader().load());
+        Scene scene = new Scene(new MainWindow().get());
         stage.setScene(scene);
         stage.show();
     }

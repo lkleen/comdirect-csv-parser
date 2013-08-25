@@ -1,7 +1,7 @@
 package org.larsworks.comdirect.core.parser;
 
 import org.larsworks.comdirect.core.io.TextFile;
-import org.larsworks.comdirect.core.io.TextFileReader;
+import org.larsworks.comdirect.core.io.TextFileReaderCallable;
 import org.larsworks.comdirect.core.io.TextLine;
 import org.larsworks.comdirect.core.model.AccountDataEntry;
 import org.testng.annotations.BeforeTest;
@@ -31,9 +31,9 @@ public class AccountDataEntryParserTest {
     @BeforeTest
     public void init() throws Exception {
         expected = new ArrayList<AccountDataEntry>();
-        TextFileReader tfr = new TextFileReader(getClass().getClassLoader().getResourceAsStream("expected_account_entries.csv"));
+        TextFileReaderCallable tfr = new TextFileReaderCallable(getClass().getClassLoader().getResourceAsStream("expected_account_entries.csv"));
         TextFile file = tfr.call();
-        for(TextLine line :file.getTextLines()) {
+        for(TextLine line :file.getLines()) {
             if (line.getText() != null && line.getText().length() > 0) {
                 expected.add(createEntry(line));
             }
@@ -43,7 +43,7 @@ public class AccountDataEntryParserTest {
     @Test
     public void test() throws Exception {
         InputStream testData = getClass().getClassLoader().getResourceAsStream("umsaetze_8115990_20130526-1520.testdata.csv");
-        TextFile file = new TextFileReader(testData).call();
+        TextFile file = new TextFileReaderCallable(testData).call();
         Set<AccountDataEntry> data = entryParser.parse(file);
         assertEquals(data, expected);
     }

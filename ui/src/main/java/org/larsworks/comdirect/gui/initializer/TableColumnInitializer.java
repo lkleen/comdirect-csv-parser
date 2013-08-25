@@ -1,10 +1,13 @@
 package org.larsworks.comdirect.gui.initializer;
 
 import java.lang.reflect.Field;
+import java.util.Map;
 
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import org.larsworks.comdirect.core.annotations.processor.ColumnData;
+import org.larsworks.comdirect.core.annotations.processor.ColumnDataAnnotationProcessor;
 import org.larsworks.comdirect.core.annotations.view.Ignore;
 
 /**
@@ -23,14 +26,14 @@ public class TableColumnInitializer<T> {
     }
 
     public void init(Class<T> clazz) {
-        for(Field field : clazz.getDeclaredFields()) {
-            if (field.isAnnotationPresent(Ignore.class)) {
-                continue;
-            }
-            String name = field.getName();
-            TableColumn col = new TableColumn(name);
-            col.setCellValueFactory(new PropertyValueFactory<T, String>(name));
+        ColumnDataAnnotationProcessor<T> processor = new ColumnDataAnnotationProcessor<T>();
+        Map<Field, ColumnData> map = processor.process(clazz);
+        for(Map.Entry<Field, ColumnData> entry : processor.process(clazz).entrySet()) {
+            TableColumn col = new TableColumn(entry.getValue().getName());
+            col.setCellValueFactory(new PropertyValueFactory<T, String>(entry.getKey().getName()));
+            col.setPrefWidth(entry.getValue().getWidth());
             tableView.getColumns().add(col);
         }
+
     }
 }

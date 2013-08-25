@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.paint.*?>
 
-<AnchorPane id="AnchorPane" fx:id="mainPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="org.larsworks.comdirect.gui.controller.AccountAnalyzerController">
+<AnchorPane id="AnchorPane" fx:id="mainPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="org.larsworks.comdirect.gui.windows.main.controller.MainWindowController">
   <children>
     <MenuBar id="menu" prefWidth="600.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
       <menus>
@@ -15,7 +15,8 @@
           <items>
             <MenuItem id="menu-file-open" mnemonicParsing="false" text="Open" />
             <MenuItem id="menu-file-close" mnemonicParsing="false" text="Close" />
-            <MenuItem id="menu-file-import" mnemonicParsing="false" onAction="#importData" text="Import" fx:id="importMenuItem" />
+            <MenuItem id="menu-file-import" mnemonicParsing="false" onAction="#importData" text="Import"/>
+            <MenuItem id="menu-file-preferences" mnemonicParsing="false" onAction="#preferences" text="Preferences" />
           </items>
         </Menu>
         <Menu mnemonicParsing="false" text="Help">

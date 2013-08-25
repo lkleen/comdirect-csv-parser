@@ -15,7 +15,7 @@ public abstract class AbstractParser<T> {
     Tokenizer tokenizer = new Tokenizer();
 
     public T parse(TextFile file) {
-        TextLines lines = file.getTextLines();
+        TextLines lines = file.getLines();
         T data = getInstance();
         for(TextLine line : lines) {
             fillResult(data, line);

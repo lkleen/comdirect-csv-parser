@@ -1,6 +1,7 @@
 package org.larsworks.comdirect.core.statistics;
 
 import lombok.Data;
+import org.larsworks.comdirect.core.annotations.view.Column;
 
 /**
  * @author Lars Kleen
@@ -11,6 +12,7 @@ import lombok.Data;
 @Data
 public class Category implements Comparable<Category> {
 
+    @Column(name = "Category", width = 250)
     private final String category;
 
     @Override

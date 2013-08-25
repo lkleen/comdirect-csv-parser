@@ -1,7 +1,7 @@
 package org.larsworks.comdirect.core.parser;
 
 import org.larsworks.comdirect.core.io.TextFile;
-import org.larsworks.comdirect.core.io.TextFileReader;
+import org.larsworks.comdirect.core.io.TextFileReaderCallable;
 import org.larsworks.comdirect.core.model.AccountDataMetaData;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
@@ -41,7 +41,7 @@ public class AccountMetaDataParserTest {
     @Test
     public void test() throws Exception {
         InputStream testData = getClass().getClassLoader().getResourceAsStream("umsaetze_8115990_20130526-1520.testdata.csv");
-        TextFile file = new TextFileReader(testData).call();
+        TextFile file = new TextFileReaderCallable(testData).call();
         AccountDataMetaData data = accountDataMetaDataParser.parse(file);
         assertEquals(data.getMetaData(), expected);
     }
