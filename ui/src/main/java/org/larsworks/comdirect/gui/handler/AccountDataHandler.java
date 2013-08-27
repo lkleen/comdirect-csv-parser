@@ -9,5 +9,5 @@ import org.larsworks.comdirect.core.model.AccountData;
  * @author lkleen
  * @version version?
  */
-public abstract class AccountDataHandler extends Handler<AccountData> {
+public abstract class AccountDataHandler<Target> extends Handler<AccountData, Target> {
 }

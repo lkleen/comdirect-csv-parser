@@ -16,16 +16,10 @@ import org.larsworks.comdirect.gui.handler.AccountDataHandler;
  * @version 0.0.1
  */
 @Slf4j
-public class AccountDataTableViewHandler extends AccountDataHandler {
-
-    private final TableView tableView;
-
-    public AccountDataTableViewHandler(TableView tableView) {
-        this.tableView = tableView;
-    }
+public class AccountDataTableViewHandler extends AccountDataHandler<TableView> {
 
     @Override
-    public void handle(AccountData accountData) {
+    public void handle(AccountData accountData, TableView tableView) {
         ObservableList list = FXCollections.observableArrayList(accountData.getAccountDataEntries());
         tableView.setItems(list);
     }

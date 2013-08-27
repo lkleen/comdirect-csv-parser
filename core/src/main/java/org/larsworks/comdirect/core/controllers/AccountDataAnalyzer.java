@@ -2,7 +2,9 @@ package org.larsworks.comdirect.core.controllers;
 
 import lombok.extern.slf4j.Slf4j;
 import org.larsworks.comdirect.core.model.AccountData;
-import org.larsworks.comdirect.core.parser.DecimalParser;
+import org.larsworks.comdirect.core.parser.SimpleDecimalParser;
+
+import javax.inject.Inject;
 
 /**
  * Date: 7/24/13
@@ -16,15 +18,10 @@ public class AccountDataAnalyzer {
 
     private static final String KEY_INITIAL_VALUE = "Alter Kontostand";
 
-    private final DecimalParser parser = new DecimalParser();
+    @Inject
+    private SimpleDecimalParser parser;
 
-    private final AccountData accountData;
-
-    public AccountDataAnalyzer(AccountData accountData) {
-        this.accountData = accountData;
-    }
-
-    public float getInitialValue() {
+    public float getInitialValueFrom(AccountData accountData) {
         String value = accountData.getAccountDataMetaData().getMetaData().get(KEY_INITIAL_VALUE);
         if(value == null) {
             log.warn("could not parse initial value. returning 0");

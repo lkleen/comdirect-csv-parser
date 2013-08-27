@@ -13,6 +13,7 @@ import org.larsworks.comdirect.gui.windows.preferences.handler.CategoriesKeyEven
 import org.larsworks.comdirect.gui.windows.preferences.handler.CategoriesTableViewHandler;
 import org.larsworks.comdirect.gui.windows.preferences.initializer.CategoriesTableViewInitializer;
 
+import javax.inject.Inject;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -31,10 +32,13 @@ public class PreferencesWindowController implements Initializable {
     @FXML
     private TableView categoriesTableView;
 
-    private final CategoryManager categoryManager = new CategoryManager();
+    @Inject
+    private CategoryManager categoryManager;
 
+    @Inject
     private CategoriesTableViewHandler categoriesTableViewHandler;
 
+    @Inject
     private CategoriesKeyEventHandler categoriesKeyEventHandler;
 
     private Categories categories;
@@ -42,17 +46,15 @@ public class PreferencesWindowController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         new CategoriesTableViewInitializer(categoriesTableView).init();
-        categoriesTableViewHandler = new CategoriesTableViewHandler(categoriesTableView);
-        categories = categoryManager.load();
-        categoriesTableViewHandler.handle(categories);
-        categoriesKeyEventHandler = new CategoriesKeyEventHandler(categories);
+        categories = categoryManager.getCategories();
+        categoriesTableViewHandler.handle(categories, categoriesTableView);
     }
 
     @FXML
     void add() {
         Category category = new Category(preferencesCategoriesName.getText());
         categories.add(category);
-        categoriesTableViewHandler.handle(categories);
+        categoriesTableViewHandler.handle(categories, categoriesTableView);
         categoryManager.save(categories);
     }
 
@@ -61,8 +63,8 @@ public class PreferencesWindowController implements Initializable {
 
     @FXML
     void keyPressed(KeyEvent event) {
-        categoriesKeyEventHandler.handle(event);
-        categoriesTableViewHandler.handle(categories);
+        categoriesKeyEventHandler.handle(event, categories);
+        categoriesTableViewHandler.handle(categories, categoriesTableView);
         categoryManager.save(categories);
     }
 

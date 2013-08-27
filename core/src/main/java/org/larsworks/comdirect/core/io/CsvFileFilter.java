@@ -2,7 +2,7 @@ package org.larsworks.comdirect.core.io;
 
 /**
  * @author Lars Kleen
- * @since ?version
+ * @since 0.0.1
  *        Date: 26.05.13
  *        Time: 16:14
  */

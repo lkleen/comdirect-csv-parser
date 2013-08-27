@@ -27,7 +27,6 @@ public class TableColumnInitializer<T> {
 
     public void init(Class<T> clazz) {
         ColumnDataAnnotationProcessor<T> processor = new ColumnDataAnnotationProcessor<T>();
-        Map<Field, ColumnData> map = processor.process(clazz);
         for(Map.Entry<Field, ColumnData> entry : processor.process(clazz).entrySet()) {
             TableColumn col = new TableColumn(entry.getValue().getName());
             col.setCellValueFactory(new PropertyValueFactory<T, String>(entry.getKey().getName()));

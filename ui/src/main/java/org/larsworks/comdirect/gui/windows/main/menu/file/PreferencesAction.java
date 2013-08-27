@@ -4,6 +4,8 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import org.larsworks.comdirect.gui.windows.PreferencesWindow;
 
+import javax.inject.Inject;
+
 /**
  * @author Lars Kleen
  * @since 0.0.1
@@ -12,7 +14,8 @@ import org.larsworks.comdirect.gui.windows.PreferencesWindow;
  */
 public class PreferencesAction extends MenuItemAction {
 
-    private final PreferencesWindow preferencesWindow = new PreferencesWindow();
+    @Inject
+    private PreferencesWindow preferencesWindow;
 
     @Override
     public void execute() {

@@ -53,7 +53,7 @@ public class AccountDataEntryParserTest {
         for(int i = 0; i < tokens.length; i++) {
             tokens[i] = tokens[i].replaceAll("\"", "");
         }
-        DateTimeParser parser = new DateTimeParser();
+        SimpleDateTimeParser parser = new SimpleDateTimeParser();
         NumberFormat format = new DecimalFormat();
         return new AccountDataEntry(
                 parser.parse(tokens[0]),

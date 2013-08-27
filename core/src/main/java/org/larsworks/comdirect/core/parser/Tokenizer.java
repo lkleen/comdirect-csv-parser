@@ -6,7 +6,7 @@ import java.util.*;
 
 /**
  * @author Lars Kleen
- * @since ?version
+ * @since 0.0.1
  *        Date: 26.05.13
  *        Time: 17:08
  */

@@ -1,18 +1,17 @@
 package org.larsworks.comdirect.core.parser;
 
-
 import lombok.extern.slf4j.Slf4j;
 import org.larsworks.comdirect.core.io.TextLine;
 import org.larsworks.comdirect.core.model.AccountDataEntry;
 
-import java.util.ArrayList;
+import javax.inject.Inject;
 import java.util.List;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
 /**
  * @author Lars Kleen
- * @since ?version
+ * @since 0.0.1
  *        Date: 26.05.13
  *        Time: 17:00
  */
@@ -30,8 +29,11 @@ public class AccountDataEntryParser extends AbstractParser<SortedSet<AccountData
     private static final int INDEX_TEXT = 3;
     private static final int INDEX_FLUCTUATION = 4;
 
-    private final DateTimeParser dateTimeParser = new DateTimeParser();
-    private final DecimalParser decimalParser = new DecimalParser();
+    @Inject
+    private SimpleDateTimeParser dateTimeParser;
+
+    @Inject
+    private SimpleDecimalParser decimalParser;
 
     @Override
     protected void fillResult(SortedSet<AccountDataEntry> data, TextLine line) {

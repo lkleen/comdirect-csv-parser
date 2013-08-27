@@ -13,19 +13,22 @@ import java.net.URL;
  *        Date: 25.08.13
  *        Time: 13:30
  */
-public class AbstractWindow {
+public class AbstractWindow<Controller> {
 
     private final String filename;
+    private final Controller controller;
 
     private Parent parent;
 
-    public AbstractWindow(String filename) {
+    public AbstractWindow(String filename, Controller controller) {
         this.filename = filename;
+        this.controller = controller;
     }
 
     public Parent load() {
         URL url = getClass().getClassLoader().getResource(filename);
         FXMLLoader loader = new FXMLLoader(url);
+        loader.setController(controller);
         try {
             return (Parent) loader.load();
         } catch (IOException e) {

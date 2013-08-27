@@ -2,6 +2,9 @@ package org.larsworks.comdirect.core.parser;
 
 import org.larsworks.comdirect.core.io.TextFile;
 import org.larsworks.comdirect.core.model.AccountData;
+import org.springframework.context.annotation.Bean;
+
+import javax.inject.Inject;
 
 /**
  * Date: 7/23/13
@@ -12,8 +15,11 @@ import org.larsworks.comdirect.core.model.AccountData;
  */
 public class AccountDataParser {
 
-    private final AccountDataMetaDataParser metaDataParser = new AccountDataMetaDataParser();
-    private final AccountDataEntryParser entryParser = new AccountDataEntryParser();
+    @Inject
+    private AccountDataMetaDataParser metaDataParser;
+
+    @Inject
+    private AccountDataEntryParser entryParser;
 
     public AccountData parse(TextFile textFile) {
         AccountData accountData = new AccountData();

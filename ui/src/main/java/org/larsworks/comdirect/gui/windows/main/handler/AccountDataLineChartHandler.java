@@ -8,7 +8,10 @@ import javafx.scene.control.Tooltip;
 import org.larsworks.comdirect.core.model.AccountData;
 import org.larsworks.comdirect.core.model.AccountDataEntry;
 import org.larsworks.comdirect.gui.handler.AccountDataHandler;
+import org.larsworks.comdirect.gui.handler.Handler;
 import org.larsworks.comdirect.gui.windows.main.charts.LineChartDataGenerator;
+
+import javax.inject.Inject;
 
 /**
  * Date: 7/23/13
@@ -17,18 +20,13 @@ import org.larsworks.comdirect.gui.windows.main.charts.LineChartDataGenerator;
  * @author lkleen
  * @version 0.0.1
  */
-public class AccountDataLineChartHandler extends AccountDataHandler {
+public class AccountDataLineChartHandler extends AccountDataHandler<LineChart> {
 
-    final LineChart lineChart;
-    final LineChartDataGenerator dataGenerator = new LineChartDataGenerator();
-
-
-    public AccountDataLineChartHandler(LineChart lineChart) {
-        this.lineChart = lineChart;
-    }
+    @Inject
+    private LineChartDataGenerator dataGenerator;
 
     @Override
-    public void handle(AccountData accountData) {
+    public void handle(AccountData accountData, LineChart lineChart) {
         XYChart.Series<String, Float> series = new XYChart.Series<String, Float>();
 
         series.getData().addAll(dataGenerator.generateFrom(accountData));

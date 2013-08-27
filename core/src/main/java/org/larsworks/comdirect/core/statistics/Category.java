@@ -19,4 +19,9 @@ public class Category implements Comparable<Category> {
     public int compareTo(Category that) {
         return this.category.compareTo(that.category);
     }
+
+    @Override
+    public String toString() {
+        return category;
+    }
 }

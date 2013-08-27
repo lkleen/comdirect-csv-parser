@@ -13,6 +13,8 @@ import org.larsworks.comdirect.core.model.AccountData;
 import org.larsworks.comdirect.core.model.AccountDataEntry;
 import org.larsworks.comdirect.core.controllers.AccountDataAnalyzer;
 
+import javax.inject.Inject;
+
 /**
  * Date: 7/24/13
  * Time: 3:05 PM
@@ -22,9 +24,11 @@ import org.larsworks.comdirect.core.controllers.AccountDataAnalyzer;
  */
 public class LineChartDataGenerator {
 
+    @Inject
+    private AccountDataAnalyzer analyzer;
+
     public List<XYChart.Data<String, Float>> generateFrom(AccountData accountData) {
-        AccountDataAnalyzer analyzer = new AccountDataAnalyzer(accountData);
-        float balance = analyzer.getInitialValue();
+        float balance = analyzer.getInitialValueFrom(accountData);
         List<XYChart.Data<String, Float>> list = new ArrayList<XYChart.Data<String, Float>>();
         for(AccountDataEntry entry : accountData.getAccountDataEntries()) {
             String date = entry.getValueDate().toString(DateTimeFormat.shortDate());

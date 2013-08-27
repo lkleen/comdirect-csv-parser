@@ -16,10 +16,13 @@ import org.larsworks.comdirect.core.io.TextFile;
 import org.larsworks.comdirect.core.model.AccountData;
 import org.larsworks.comdirect.core.controllers.AccountDataMerger;
 import org.larsworks.comdirect.core.parser.AccountDataParser;
+import org.larsworks.comdirect.gui.windows.main.controller.MainWindowController;
 import org.larsworks.comdirect.gui.windows.main.dialog.DirectoryChooserDialog;
 import org.larsworks.comdirect.gui.windows.main.handler.AccountDataBarChartHandler;
 import org.larsworks.comdirect.gui.windows.main.handler.AccountDataLineChartHandler;
 import org.larsworks.comdirect.gui.windows.main.handler.AccountDataTableViewHandler;
+
+import javax.inject.Inject;
 
 /**
  * Date: 7/23/13
@@ -30,21 +33,26 @@ import org.larsworks.comdirect.gui.windows.main.handler.AccountDataTableViewHand
  */
 public class ImportAction extends MenuItemAction {
 
-    final AccountDataLineChartHandler lineChartHandler;
-    final AccountDataTableViewHandler tableViewHandler;
-    final AccountDataBarChartHandler barChartHandler;
-    final DirectoryChooserDialog directoryChooserDialog;
+    @Inject
+    private MainWindowController controller;
 
-    final DirReader dirReader = new DirReader();
-    final AccountDataParser parser = new AccountDataParser();
-    final AccountDataMerger merger = new AccountDataMerger();
+    @Inject
+    private AccountDataLineChartHandler lineChartHandler;
 
-    public ImportAction(Window window, TableView tableView, LineChart lineChart, StackedBarChart barChart) {
-        directoryChooserDialog = new DirectoryChooserDialog(window);
-        lineChartHandler = new AccountDataLineChartHandler(lineChart);
-        tableViewHandler = new AccountDataTableViewHandler(tableView);
-        barChartHandler  = new AccountDataBarChartHandler(barChart);
-    }
+    @Inject
+    private AccountDataTableViewHandler tableViewHandler;
+
+    @Inject
+    private AccountDataBarChartHandler barChartHandler;
+
+    @Inject
+    private DirReader dirReader;
+
+    @Inject
+    private AccountDataParser parser;
+
+    @Inject
+    private AccountDataMerger merger;
 
     @Override
     public void execute() {
@@ -56,15 +64,15 @@ public class ImportAction extends MenuItemAction {
     }
 
     private void updateBarChartWith(AccountData accountData) {
-        barChartHandler.handle(accountData);
+        barChartHandler.handle(accountData, controller.getAccountDataBarChart());
     }
 
     private void updateLineChartWith(AccountData accountData) {
-        lineChartHandler.handle(accountData);
+        lineChartHandler.handle(accountData, controller.getAccountDataLineChart());
     }
 
     private void updateTableViewWith(AccountData accountData) {
-        tableViewHandler.handle(accountData);
+        tableViewHandler.handle(accountData, controller.getAccountDataTableView());
     }
 
     private AccountData merge(List<AccountData> accountDataList) {
@@ -84,6 +92,7 @@ public class ImportAction extends MenuItemAction {
     }
 
     private File getPath() {
-        return directoryChooserDialog.show();
+        DirectoryChooserDialog dialog = new DirectoryChooserDialog(controller.getMainPane().getScene().getWindow());
+        return dialog.show();
     }
 }

@@ -16,16 +16,10 @@ import java.util.ArrayList;
  *        Date: 25.08.13
  *        Time: 14:07
  */
-public class CategoriesTableViewHandler extends Handler<Categories> {
-
-    private final TableView tableView;
-
-    public CategoriesTableViewHandler(TableView tableView) {
-        this.tableView = tableView;
-    }
+public class CategoriesTableViewHandler extends Handler<Categories, TableView> {
 
     @Override
-    public void handle(Categories categories) {
+    public void handle(Categories categories, TableView tableView) {
         ObservableList<Category> list = FXCollections.observableList(new ArrayList<>(categories));
         tableView.setItems(list);
     }

@@ -1,9 +1,7 @@
 package org.larsworks.comdirect.gui.windows;
 
-import java.net.URL;
-
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
+import org.larsworks.comdirect.gui.windows.main.controller.MainWindowController;
+import org.larsworks.comdirect.gui.windows.preferences.controller.PreferencesWindowController;
 
 /**
  * Date: 7/23/13
@@ -12,8 +10,9 @@ import javafx.scene.Parent;
  * @author lkleen
  * @version 0.0.1
  */
-public class MainWindow extends AbstractWindow {
-    public MainWindow() {
-        super("gui.fxml");
+public class MainWindow extends AbstractWindow<MainWindowController> {
+
+    public MainWindow(MainWindowController controller) {
+        super("gui.fxml", controller);
     }
 }

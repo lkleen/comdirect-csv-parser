@@ -14,16 +14,10 @@ import org.larsworks.comdirect.gui.handler.Handler;
  *        Time: 19:26
  */
 @Slf4j
-public class CategoriesKeyEventHandler extends Handler<KeyEvent> {
-
-    private final Categories categories;
-
-    public CategoriesKeyEventHandler(Categories categories) {
-        this.categories = categories;
-    }
+public class CategoriesKeyEventHandler extends Handler<KeyEvent, Categories> {
 
     @Override
-    public void handle(KeyEvent event) {
+    public void handle(KeyEvent event, Categories categories) {
         switch (event.getCode()) {
             case DELETE:
                 TableView tableView = (TableView) event.getSource();

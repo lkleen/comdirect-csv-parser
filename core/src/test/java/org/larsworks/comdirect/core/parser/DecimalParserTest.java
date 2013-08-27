@@ -17,7 +17,7 @@ import java.util.List;
  */
 public class DecimalParserTest {
 
-    private final DecimalParser parser = new DecimalParser();
+    private final SimpleDecimalParser parser = new SimpleDecimalParser();
 
 
     @DataProvider(name = "parameters")

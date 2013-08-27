@@ -17,21 +17,15 @@ import java.util.List;
  *        Date: 27.07.13
  *        Time: 22:58
  */
-public class AccountDataBarChartHandler extends AccountDataHandler {
-
-    private final StackedBarChart barChart;
-
-    public AccountDataBarChartHandler(StackedBarChart barChart) {
-        this.barChart = barChart;
-    }
+public class AccountDataBarChartHandler extends AccountDataHandler<StackedBarChart> {
 
     @Override
-    public void handle(AccountData accountData) {
-        clearChart();
-        fillChartWith(accountData);
+    public void handle(AccountData accountData, StackedBarChart barChart) {
+        clearChart(barChart);
+        fillChartWith(accountData, barChart);
     }
 
-    private void fillChartWith(AccountData accountData) {
+    private void fillChartWith(AccountData accountData, StackedBarChart barChart) {
         List<XYChart.Series<String, Float>> list = new ArrayList<XYChart.Series<String, Float>>();
         AccountingStatistic statistic = new AccountingStatistic(accountData);
         AccountingStatisticsData data = statistic.generator().generate();
@@ -45,7 +39,7 @@ public class AccountDataBarChartHandler extends AccountDataHandler {
         barChart.setData(FXCollections.observableArrayList(list));
     }
 
-    private void clearChart() {
+    private void clearChart(StackedBarChart barChart) {
         barChart.setData(FXCollections.emptyObservableList());
     }
 

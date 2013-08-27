@@ -6,6 +6,8 @@ import java.util.Locale;
 
 import org.larsworks.comdirect.core.exceptions.DecimalParserException;
 
+import javax.inject.Inject;
+
 /**
  * Date: 7/23/13
  * Time: 11:01 AM
@@ -13,9 +15,10 @@ import org.larsworks.comdirect.core.exceptions.DecimalParserException;
  * @author lkleen
  * @version 0.0.1
  */
-public class DecimalParser {
+public class SimpleDecimalParser {
 
-    private final NumberFormat format = NumberFormat.getNumberInstance(Locale.GERMANY);
+    @Inject
+    private NumberFormat format;
 
     public float  parse(String decimal) throws DecimalParserException {
         try {

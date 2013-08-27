@@ -2,6 +2,7 @@ package org.larsworks.comdirect.core.controllers;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
+import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import org.larsworks.comdirect.core.exceptions.CategoryManagerException;
 import org.larsworks.comdirect.core.exceptions.TextFileReaderException;
@@ -10,6 +11,7 @@ import org.larsworks.comdirect.core.io.FileWriterCallable;
 import org.larsworks.comdirect.core.io.TextFileReader;
 import org.larsworks.comdirect.core.model.Categories;
 
+import javax.inject.Inject;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -25,12 +27,25 @@ public class CategoryManager {
 
     private final String filename = "categories.gson";
 
-    private final TextFileReader fileReader = new TextFileReader();
-    private final FileWriter fileWriter = new FileWriter();
+    @Inject
+    private TextFileReader fileReader;
 
-    private final Gson gson = new Gson();
+    @Inject
+    private FileWriter fileWriter;
 
-    public Categories load() {
+    @Inject
+    private Gson gson;
+
+    private Categories categories = null;
+
+    public Categories getCategories() {
+        if(categories == null) {
+            categories = load();
+        }
+        return categories;
+    }
+
+    private Categories load() {
         String text = readFile();
         if (text == null) {
             return new Categories();

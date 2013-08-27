@@ -9,8 +9,8 @@ import java.util.concurrent.Callable;
  * @author lkleen
  * @version 0.0.1
  */
-public abstract class Handler<T> {
+public abstract class Handler<Source, Target> {
 
-    public abstract void handle(final T t);
+    public abstract void handle(final Source source, final Target target);
 
 }
