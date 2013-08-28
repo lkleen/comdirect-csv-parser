@@ -5,6 +5,7 @@ import javafx.beans.value.ObservableValueBase;
 import javafx.collections.FXCollections;
 import javafx.scene.control.*;
 
+import javafx.scene.layout.AnchorPane;
 import javafx.util.Callback;
 import org.larsworks.comdirect.core.controllers.CategoryManager;
 import org.larsworks.comdirect.core.model.AccountDataEntry;
@@ -12,6 +13,7 @@ import org.larsworks.comdirect.core.model.Categories;
 import org.larsworks.comdirect.core.statistics.Category;
 import org.larsworks.comdirect.gui.initializer.Initializer;
 import org.larsworks.comdirect.gui.initializer.TableColumnInitializer;
+import org.larsworks.comdirect.gui.windows.main.controller.MainWindowController;
 
 import javax.inject.Inject;
 
@@ -22,10 +24,13 @@ import javax.inject.Inject;
  * @author lkleen
  * @version 0.0.1
  */
-public class AccountDataTableViewInitializer extends Initializer<TableView> {
+public class AccountDataTableViewInitializer extends Initializer<MainWindowController> {
 
     @Inject
     private CategoryManager categoryManager;
+
+    @Inject
+    private TableColumnInitializer<AccountDataEntry> tableColumnInitializer;
 
     class CategoryCell extends TableCell<Category, Categories> {
         final ChoiceBox choiceBox = new ChoiceBox(FXCollections.observableArrayList(categoryManager.getCategories()));
@@ -51,17 +56,11 @@ public class AccountDataTableViewInitializer extends Initializer<TableView> {
 
     }
 
-    public AccountDataTableViewInitializer(TableView tableView) {
-        super(tableView);
-    }
-
     @Override
     public void init() {
-        new TableColumnInitializer<AccountDataEntry>(initializable).init(AccountDataEntry.class);
+        tableColumnInitializer.init(initializable.getAccountDataTableView(), AccountDataEntry.class);
 
         TableColumn<Category, Categories> col = new TableColumn<>("SUPERDUPER");
-
-        //ChoiceBoxTableCell<Category, Categories> cbtc =
 
         col.setCellFactory(new Callback<TableColumn<Category, Categories>, TableCell<Category, Categories>>() {
             @Override
@@ -76,6 +75,6 @@ public class AccountDataTableViewInitializer extends Initializer<TableView> {
                 return new CategoriesProperty(categoryManager.getCategories());
             }
         });
-        initializable.getColumns().add(col);
+        initializable.getAccountDataTableView().getColumns().add(col);
     }
 }

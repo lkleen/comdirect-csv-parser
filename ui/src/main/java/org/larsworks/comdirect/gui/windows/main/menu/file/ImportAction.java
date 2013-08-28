@@ -18,6 +18,7 @@ import org.larsworks.comdirect.core.controllers.AccountDataMerger;
 import org.larsworks.comdirect.core.parser.AccountDataParser;
 import org.larsworks.comdirect.gui.windows.main.controller.MainWindowController;
 import org.larsworks.comdirect.gui.windows.main.dialog.DirectoryChooserDialog;
+import org.larsworks.comdirect.gui.windows.main.dialog.FileChooserDialog;
 import org.larsworks.comdirect.gui.windows.main.handler.AccountDataBarChartHandler;
 import org.larsworks.comdirect.gui.windows.main.handler.AccountDataLineChartHandler;
 import org.larsworks.comdirect.gui.windows.main.handler.AccountDataTableViewHandler;
@@ -92,7 +93,7 @@ public class ImportAction extends MenuItemAction {
     }
 
     private File getPath() {
-        DirectoryChooserDialog dialog = new DirectoryChooserDialog(controller.getMainPane().getScene().getWindow());
+        FileChooserDialog dialog = new FileChooserDialog(controller.getMainPane().getScene().getWindow());
         return dialog.show();
     }
 }

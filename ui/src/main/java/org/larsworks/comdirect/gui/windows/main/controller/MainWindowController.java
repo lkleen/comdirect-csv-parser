@@ -62,6 +62,11 @@ public class MainWindowController implements Initializable {
     @Inject
     private ImportAction importAction;
 
+    @Inject
+    private AccountDataBarChartInitializer accountDataBarChartInitializer;
+
+    @Inject AccountDataTableViewInitializer accountDataTableViewInitializer;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         initializeTableView();
@@ -69,12 +74,12 @@ public class MainWindowController implements Initializable {
     }
 
     private void initializeBarChart() {
-        new AccountDataBarChartInitializer(accountDataBarChart).init();
+        accountDataBarChartInitializer.init();
 
     }
 
     private void initializeTableView() {
-        new AccountDataTableViewInitializer(accountDataTableView).init();
+        accountDataTableViewInitializer.init();
     }
 
     @FXML

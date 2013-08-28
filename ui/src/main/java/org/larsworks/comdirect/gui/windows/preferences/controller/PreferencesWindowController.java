@@ -41,11 +41,14 @@ public class PreferencesWindowController implements Initializable {
     @Inject
     private CategoriesKeyEventHandler categoriesKeyEventHandler;
 
+    @Inject
+    private CategoriesTableViewInitializer categoriesTableViewInitializer;
+
     private Categories categories;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        new CategoriesTableViewInitializer(categoriesTableView).init();
+        categoriesTableViewInitializer.init();
         categories = categoryManager.getCategories();
         categoriesTableViewHandler.handle(categories, categoriesTableView);
     }

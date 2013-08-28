@@ -5,6 +5,8 @@ import org.larsworks.comdirect.core.statistics.Category;
 import org.larsworks.comdirect.gui.initializer.Initializer;
 import org.larsworks.comdirect.gui.initializer.TableColumnInitializer;
 
+import javax.inject.Inject;
+
 /**
  * @author Lars Kleen
  * @since 0.0.1
@@ -13,12 +15,12 @@ import org.larsworks.comdirect.gui.initializer.TableColumnInitializer;
  */
 public class CategoriesTableViewInitializer extends Initializer<TableView> {
 
-    public CategoriesTableViewInitializer(TableView initializable) {
-        super(initializable);
-    }
+    @Inject
+    private TableColumnInitializer<Category> tableColumnInitializer;
+
 
     @Override
     public void init() {
-        new TableColumnInitializer<Category>(initializable).init(Category.class);
+        tableColumnInitializer.init(initializable, Category.class);
     }
 }

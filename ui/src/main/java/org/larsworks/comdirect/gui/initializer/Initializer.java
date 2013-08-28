@@ -1,5 +1,7 @@
 package org.larsworks.comdirect.gui.initializer;
 
+import javax.inject.Inject;
+
 /**
  * Date: 7/23/13
  * Time: 5:46 PM
@@ -9,11 +11,9 @@ package org.larsworks.comdirect.gui.initializer;
  */
 public abstract class Initializer<T> {
 
-    protected final T initializable;
-
-    public Initializer(T initializable) {
-        this.initializable = initializable;
-    }
+    @Inject
+    protected T initializable;
 
     public abstract void init();
+
 }

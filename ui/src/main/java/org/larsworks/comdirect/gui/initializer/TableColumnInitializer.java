@@ -19,13 +19,7 @@ import org.larsworks.comdirect.core.annotations.view.Ignore;
  */
 public class TableColumnInitializer<T> {
 
-    private final TableView tableView;
-
-    public TableColumnInitializer(TableView tableView) {
-        this.tableView = tableView;
-    }
-
-    public void init(Class<T> clazz) {
+    public void init(TableView tableView, Class<T> clazz) {
         ColumnDataAnnotationProcessor<T> processor = new ColumnDataAnnotationProcessor<T>();
         for(Map.Entry<Field, ColumnData> entry : processor.process(clazz).entrySet()) {
             TableColumn col = new TableColumn(entry.getValue().getName());

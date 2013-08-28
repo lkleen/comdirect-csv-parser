@@ -10,6 +10,7 @@ import org.larsworks.comdirect.gui.windows.main.controller.MainWindowController;
 import org.larsworks.comdirect.gui.windows.main.handler.AccountDataBarChartHandler;
 import org.larsworks.comdirect.gui.windows.main.handler.AccountDataLineChartHandler;
 import org.larsworks.comdirect.gui.windows.main.handler.AccountDataTableViewHandler;
+import org.larsworks.comdirect.gui.windows.main.initializer.AccountDataBarChartInitializer;
 import org.larsworks.comdirect.gui.windows.main.menu.file.ImportAction;
 import org.larsworks.comdirect.gui.windows.preferences.controller.PreferencesWindowController;
 import org.larsworks.comdirect.gui.windows.preferences.handler.CategoriesKeyEventHandler;
@@ -44,7 +45,8 @@ public class GuiConfiguration extends CoreConfiguration {
 
     @Bean
     public MainWindowController mainWindowController() {
-        return new MainWindowController();
+        MainWindowController controller = new MainWindowController();
+        return controller;
     }
 
     @Bean
@@ -86,4 +88,11 @@ public class GuiConfiguration extends CoreConfiguration {
     public CategoriesKeyEventHandler categoriesKeyEventHandler() {
         return new CategoriesKeyEventHandler();
     }
+
+    @Bean
+    public AccountDataBarChartInitializer accountDataBarChartInitializer() {
+        return new AccountDataBarChartInitializer();
+    }
+
+
 }
