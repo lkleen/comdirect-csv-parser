@@ -24,8 +24,7 @@ import javax.inject.Inject;
  */
 public class AccountDataTableViewInitializer extends Initializer<TableView> {
 
-    @Inject
-    private CategoryManager categoryManager;
+    private final CategoryManager categoryManager;
 
     class CategoryCell extends TableCell<Category, Categories> {
         final ChoiceBox choiceBox = new ChoiceBox(FXCollections.observableArrayList(categoryManager.getCategories()));
@@ -51,8 +50,9 @@ public class AccountDataTableViewInitializer extends Initializer<TableView> {
 
     }
 
-    public AccountDataTableViewInitializer(TableView tableView) {
+    public AccountDataTableViewInitializer(TableView tableView, CategoryManager categoryManager) {
         super(tableView);
+        this.categoryManager = categoryManager;
     }
 
     @Override
@@ -60,6 +60,7 @@ public class AccountDataTableViewInitializer extends Initializer<TableView> {
         new TableColumnInitializer<AccountDataEntry>(initializable).init(AccountDataEntry.class);
 
         TableColumn<Category, Categories> col = new TableColumn<>("SUPERDUPER");
+        initializable.getColumns().add(col);
 
         //ChoiceBoxTableCell<Category, Categories> cbtc =
 
@@ -76,6 +77,6 @@ public class AccountDataTableViewInitializer extends Initializer<TableView> {
                 return new CategoriesProperty(categoryManager.getCategories());
             }
         });
-        initializable.getColumns().add(col);
+
     }
 }

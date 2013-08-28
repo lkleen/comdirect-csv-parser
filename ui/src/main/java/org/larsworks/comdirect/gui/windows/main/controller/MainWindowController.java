@@ -10,11 +10,11 @@ import javafx.scene.chart.LineChart;
 import javafx.scene.chart.StackedBarChart;
 import javafx.scene.control.TableView;
 import javafx.scene.layout.AnchorPane;
-import javafx.stage.Window;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 
 import org.larsworks.comdirect.core.controllers.AccountDataMerger;
+import org.larsworks.comdirect.core.controllers.CategoryManager;
 import org.larsworks.comdirect.core.io.DirReader;
 import org.larsworks.comdirect.core.parser.AccountDataParser;
 import org.larsworks.comdirect.gui.windows.main.initializer.AccountDataBarChartInitializer;
@@ -62,6 +62,9 @@ public class MainWindowController implements Initializable {
     @Inject
     private ImportAction importAction;
 
+    @Inject
+    private CategoryManager categoryManager;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         initializeTableView();
@@ -74,7 +77,7 @@ public class MainWindowController implements Initializable {
     }
 
     private void initializeTableView() {
-        new AccountDataTableViewInitializer(accountDataTableView).init();
+        new AccountDataTableViewInitializer(accountDataTableView, categoryManager).init();
     }
 
     @FXML
