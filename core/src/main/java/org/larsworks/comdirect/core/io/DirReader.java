@@ -14,8 +14,8 @@ import java.util.concurrent.*;
 /**
  * @author Lars Kleen
  * @since 0.0.1
- *        Date: 26.05.13
- *        Time: 16:04
+ * Date: 26.05.13
+ * Time: 16:04
  */
 @Slf4j
 public class DirReader {
@@ -25,7 +25,11 @@ public class DirReader {
     public List<TextFile> readDir(String source, FileFilter fileFilter) {
         File dir = new File(source);
         if (!dir.isDirectory()) {
-            throw new DirectoryReaderException(source + " is no directory");
+            if(fileFilter.accept(dir.getAbsoluteFile())) {
+                return readParallel(dir);
+            } else {
+                throw new DirectoryReaderException(source + " is neither a directory nor an accepted file type.");
+            }
         }
         return readParallel(dir.listFiles(fileFilter));
     }

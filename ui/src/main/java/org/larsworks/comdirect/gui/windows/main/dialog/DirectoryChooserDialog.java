@@ -7,17 +7,16 @@ import java.io.File;
 
 /**
  * @author Lars Kleen
- * @since ?version
- *        Date: 28.07.13
- *        Time: 12:34
+ * @since 0.0.1
+ * Date: 28.07.13
+ * Time: 12:34
  */
 public class DirectoryChooserDialog extends Dialog<File> {
 
     private final DirectoryChooserBuilder builder;
-    private final Window window;
 
     public DirectoryChooserDialog(Window window) {
-        this.window = window;
+        super(window);
         builder = DirectoryChooserBuilder.create();
         builder.title("choose import directory");
     }
