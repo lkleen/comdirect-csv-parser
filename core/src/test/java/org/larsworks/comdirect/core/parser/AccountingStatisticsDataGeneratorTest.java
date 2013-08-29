@@ -1,7 +1,7 @@
 package org.larsworks.comdirect.core.parser;
 
 import org.joda.time.DateTime;
-import org.larsworks.comdirect.core.model.AccountData;
+import org.larsworks.comdirect.core.model.*;
 import org.larsworks.comdirect.core.model.AccountDataEntry;
 import org.larsworks.comdirect.core.statistics.*;
 import org.testng.annotations.BeforeTest;

@@ -8,7 +8,6 @@ import javafx.scene.control.Tooltip;
 import org.larsworks.comdirect.core.model.AccountData;
 import org.larsworks.comdirect.core.model.AccountDataEntry;
 import org.larsworks.comdirect.gui.handler.AccountDataHandler;
-import org.larsworks.comdirect.gui.handler.Handler;
 import org.larsworks.comdirect.gui.windows.main.charts.LineChartDataGenerator;
 
 import javax.inject.Inject;

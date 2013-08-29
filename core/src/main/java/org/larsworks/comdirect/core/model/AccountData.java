@@ -2,7 +2,6 @@ package org.larsworks.comdirect.core.model;
 
 import lombok.Data;
 
-import java.util.List;
 import java.util.SortedSet;
 
 /**
