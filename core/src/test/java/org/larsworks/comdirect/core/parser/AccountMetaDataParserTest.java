@@ -7,6 +7,7 @@ import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 import java.io.InputStream;
+import java.nio.charset.Charset;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -41,7 +42,7 @@ public class AccountMetaDataParserTest {
     @Test
     public void test() throws Exception {
         InputStream testData = getClass().getClassLoader().getResourceAsStream("umsaetze_8115990_20130526-1520.testdata.csv");
-        TextFile file = new TextFileReaderCallable(testData).call();
+        TextFile file = new TextFileReaderCallable(testData, Charset.defaultCharset()).call();
         AccountDataMetaData data = accountDataMetaDataParser.parse(file);
         assertEquals(data.getMetaData(), expected);
     }

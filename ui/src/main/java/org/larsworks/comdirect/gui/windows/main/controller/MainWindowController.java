@@ -23,6 +23,7 @@ import org.larsworks.comdirect.gui.windows.main.menu.file.ImportAction;
 import org.larsworks.comdirect.gui.windows.main.menu.file.PreferencesAction;
 
 import javax.inject.Inject;
+import javax.inject.Named;
 
 /**
  * Date: 7/23/13
@@ -51,16 +52,10 @@ public class MainWindowController implements Initializable {
     private AnchorPane mainPane;
 
     @Inject
-    private DirReader dirReader;
-
-    @Inject
-    private AccountDataParser parser;
-
-    @Inject
-    private AccountDataMerger merger;
-
-    @Inject
     private ImportAction importAction;
+
+    @Inject
+    private PreferencesAction preferencesAction;
 
     @Inject
     private CategoryManager categoryManager;
@@ -87,7 +82,7 @@ public class MainWindowController implements Initializable {
 
     @FXML
     public void preferences(ActionEvent event) {
-        new PreferencesAction().execute();
+        preferencesAction.execute();
     }
 
 }

@@ -3,6 +3,7 @@ package org.larsworks.comdirect.core.io;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.nio.charset.Charset;
 import java.util.concurrent.Callable;
 
 /**
@@ -15,13 +16,16 @@ public class TextFileReaderCallable implements Callable<TextFile> {
 
     private final InputStream inputStream;
 
-    public TextFileReaderCallable(InputStream inputStream) {
+    private final Charset charset;
+
+    public TextFileReaderCallable(InputStream inputStream, Charset charset) {
         this.inputStream = inputStream;
+        this.charset = charset;
     }
 
     @Override
     public TextFile call() throws Exception {
-        BufferedReader br = new BufferedReader(new InputStreamReader(inputStream, "ISO-8859-1"));
+        BufferedReader br = new BufferedReader(new InputStreamReader(inputStream, charset.name()));
         TextLines textLines = new TextLines();
         String line = null;
         StringBuilder sb = new StringBuilder();

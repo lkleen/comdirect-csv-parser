@@ -24,6 +24,7 @@ import org.larsworks.comdirect.gui.windows.main.handler.AccountDataLineChartHand
 import org.larsworks.comdirect.gui.windows.main.handler.AccountDataTableViewHandler;
 
 import javax.inject.Inject;
+import javax.inject.Named;
 
 /**
  * Date: 7/23/13
@@ -47,6 +48,7 @@ public class ImportAction extends MenuItemAction {
     private AccountDataBarChartHandler barChartHandler;
 
     @Inject
+    @Named("ISO-8859-1")
     private DirReader dirReader;
 
     @Inject

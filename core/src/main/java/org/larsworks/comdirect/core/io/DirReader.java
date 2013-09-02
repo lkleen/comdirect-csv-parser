@@ -1,5 +1,6 @@
 package org.larsworks.comdirect.core.io;
 
+import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import org.larsworks.comdirect.core.exceptions.DirectoryReaderException;
 
@@ -7,6 +8,7 @@ import java.io.File;
 import java.io.FileFilter;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.*;
@@ -21,6 +23,9 @@ import java.util.concurrent.*;
 public class DirReader {
 
     private final ExecutorService executor = Executors.newCachedThreadPool();
+
+    @Setter
+    private Charset charset = Charset.defaultCharset();
 
     public List<TextFile> readDir(String source, FileFilter fileFilter) {
         File dir = new File(source);
@@ -39,7 +44,7 @@ public class DirReader {
         List<TextFile> result = new ArrayList<TextFile>();
         for (File file : files) {
             try {
-                TextFileReaderCallable reader = new TextFileReaderCallable(new FileInputStream(file));
+                TextFileReaderCallable reader = new TextFileReaderCallable(new FileInputStream(file), charset);
                 futures.add(executor.submit(reader));
             } catch (FileNotFoundException e) {
                 DirReader.log.error("could not read {}", file, e);

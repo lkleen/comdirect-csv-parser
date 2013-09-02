@@ -10,9 +10,12 @@ import org.larsworks.comdirect.core.io.DirReader;
 import org.larsworks.comdirect.core.io.FileWriter;
 import org.larsworks.comdirect.core.io.TextFileReader;
 import org.larsworks.comdirect.core.parser.*;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import javax.inject.Named;
+import java.nio.charset.Charset;
 import java.text.NumberFormat;
 import java.util.Locale;
 
@@ -56,8 +59,19 @@ public class CoreConfiguration {
     }
 
     @Bean
-    public DirReader dirReader() {
-        return new DirReader();
+    @Named("ISO-8859-1")
+    public DirReader dirReaderCharsetISO_8859_1() {
+        DirReader dirReader = new DirReader();
+        dirReader.setCharset(Charset.forName("ISO-8859-1"));
+        return dirReader;
+    }
+
+    @Bean
+    @Named("UTF-8")
+    public DirReader dirReaderCharsetUTF_8() {
+        DirReader dirReader = new DirReader();
+        dirReader.setCharset(Charset.forName("UTF-8"));
+        return dirReader;
     }
 
     @Bean
