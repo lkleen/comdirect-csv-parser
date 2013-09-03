@@ -1,20 +1,16 @@
 package org.larsworks.comdirect.core.parser;
 
-import org.larsworks.comdirect.core.configuration.CoreConfiguration;
 import org.larsworks.comdirect.core.io.TextFile;
 import org.larsworks.comdirect.core.io.TextFileReaderCallable;
 import org.larsworks.comdirect.core.io.TextLine;
 import org.larsworks.comdirect.core.model.AccountDataEntry;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.support.AnnotationConfigContextLoader;
-import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
-import org.testng.annotations.BeforeTest;
+import org.larsworks.comdirect.core.test.AbstractCoreTest;
 import org.testng.annotations.Test;
 
+import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 import java.io.InputStream;
 import java.nio.charset.Charset;
-import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -28,8 +24,7 @@ import static org.testng.Assert.assertEquals;
  *        Date: 26.06.13
  *        Time: 17:47
  */
-@ContextConfiguration(loader = AnnotationConfigContextLoader.class, classes = CoreConfiguration.class)
-public class AccountDataEntryParserTest extends AbstractTestNGSpringContextTests {
+public class AccountDataEntryParserTest extends AbstractCoreTest {
 
     private static final String CHARSET = "ISO-8859-1";
 
@@ -44,7 +39,7 @@ public class AccountDataEntryParserTest extends AbstractTestNGSpringContextTests
 
     private List<AccountDataEntry> expected;
 
-    @BeforeTest
+    @PostConstruct
     public void init() throws Exception {
         expected = new ArrayList<AccountDataEntry>();
         TextFileReaderCallable tfr =

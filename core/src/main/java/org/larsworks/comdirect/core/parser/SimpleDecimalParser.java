@@ -2,7 +2,6 @@ package org.larsworks.comdirect.core.parser;
 
 import java.text.NumberFormat;
 import java.text.ParseException;
-import java.util.Locale;
 
 import org.larsworks.comdirect.core.exceptions.DecimalParserException;
 
@@ -15,7 +14,7 @@ import javax.inject.Inject;
  * @author lkleen
  * @version 0.0.1
  */
-public class SimpleDecimalParser {
+public class SimpleDecimalParser  {
 
     @Inject
     private NumberFormat format;

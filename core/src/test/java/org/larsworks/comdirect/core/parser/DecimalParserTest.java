@@ -1,7 +1,10 @@
 package org.larsworks.comdirect.core.parser;
 
+import org.larsworks.comdirect.core.test.AbstractCoreTest;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
+
+import javax.inject.Inject;
 
 import static org.testng.Assert.*;
 
@@ -15,10 +18,10 @@ import java.util.List;
  * @author lkleen
  * @version 0.0.1
  */
-public class DecimalParserTest {
+public class DecimalParserTest extends AbstractCoreTest {
 
-    private final SimpleDecimalParser parser = new SimpleDecimalParser();
-
+    @Inject
+    private SimpleDecimalParser parser;
 
     @DataProvider(name = "parameters")
     public Object[][] parameters() {
