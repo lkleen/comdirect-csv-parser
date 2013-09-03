@@ -26,6 +26,8 @@ import org.larsworks.comdirect.gui.initializer.TableColumnInitializer;
 @Slf4j
 public class AccountDataTableViewInitializer extends Initializer<TableView> {
 
+    private static final int CATEGORY_COL_INDEX = 5;
+
     private final CategoryManager categoryManager;
 
     class CategoryCell extends TableCell<AccountDataEntry, Category> {
@@ -61,7 +63,8 @@ public class AccountDataTableViewInitializer extends Initializer<TableView> {
     public void init() {
         new TableColumnInitializer<AccountDataEntry>(initializable).init(AccountDataEntry.class);
 
-        TableColumn<AccountDataEntry, Category> col = new TableColumn<>("SUPERDUPER");
+        initializable.getColumns().remove(CATEGORY_COL_INDEX);
+        TableColumn<AccountDataEntry, Category> col = new TableColumn<>("Category");
         initializable.getColumns().add(col);
 
         col.setCellFactory(new Callback<TableColumn<AccountDataEntry, Category>, TableCell<AccountDataEntry, Category>>() {

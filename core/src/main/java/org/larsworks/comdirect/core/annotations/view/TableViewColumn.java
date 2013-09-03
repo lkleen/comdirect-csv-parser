@@ -2,7 +2,7 @@ package org.larsworks.comdirect.core.annotations.view;
 
 /**
  * @author Lars Kleen
- * @since ?version
+ * @since 0.0.1
  *        Date: 25.08.13
  *        Time: 18:11
  */

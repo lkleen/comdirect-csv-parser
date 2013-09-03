@@ -6,6 +6,7 @@ import org.larsworks.comdirect.core.annotations.view.Ignore;
 import java.lang.reflect.Field;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.TreeMap;
 
 /**
  * @author Lars Kleen
@@ -15,17 +16,17 @@ import java.util.Map;
  */
 public class ColumnDataAnnotationProcessor<T> {
 
-    public Map<Field, ColumnData> process(Class<T> clazz) {
-        Map<Field, ColumnData> map = new HashMap<Field, ColumnData>();
+    public Map<ColumnData, Field> process(Class<T> clazz) {
+        Map<ColumnData, Field> map = new TreeMap<>();
         for (Field field : clazz.getDeclaredFields()) {
             if(field.isAnnotationPresent(Ignore.class)) {
                 continue;
             } else {
                 Column column = field.getAnnotation(Column.class);
                 if(column != null) {
-                    map.put(field, new ColumnData(column));
+                    map.put(new ColumnData(column), field);
                 } else {
-                    map.put(field, new ColumnData(field.getName()));
+                    map.put(new ColumnData(field.getName()), field);
                 }
             }
         }

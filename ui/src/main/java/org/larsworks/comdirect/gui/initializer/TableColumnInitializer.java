@@ -27,10 +27,10 @@ public class TableColumnInitializer<T> {
 
     public void init(Class<T> clazz) {
         ColumnDataAnnotationProcessor<T> processor = new ColumnDataAnnotationProcessor<T>();
-        for(Map.Entry<Field, ColumnData> entry : processor.process(clazz).entrySet()) {
-            TableColumn col = new TableColumn(entry.getValue().getName());
-            col.setCellValueFactory(new PropertyValueFactory<T, String>(entry.getKey().getName()));
-            col.setPrefWidth(entry.getValue().getWidth());
+        for(Map.Entry<ColumnData, Field> entry : processor.process(clazz).entrySet()) {
+            TableColumn col = new TableColumn(entry.getKey().getName());
+            col.setCellValueFactory(new PropertyValueFactory<T, String>(entry.getValue().getName()));
+            col.setPrefWidth(entry.getKey().getWidth());
             tableView.getColumns().add(col);
         }
 

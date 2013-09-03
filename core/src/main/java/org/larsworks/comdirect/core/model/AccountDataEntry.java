@@ -3,6 +3,7 @@ package org.larsworks.comdirect.core.model;
 import lombok.Data;
 import lombok.NonNull;
 import org.joda.time.DateTime;
+import org.larsworks.comdirect.core.annotations.view.Column;
 import org.larsworks.comdirect.core.annotations.view.Ignore;
 import org.larsworks.comdirect.core.statistics.Category;
 
@@ -26,20 +27,26 @@ public class AccountDataEntry implements Comparable<AccountDataEntry> {
     final long id = increment++;
 
     @NonNull
+    @Column(name = "Posting", order = 0)
     final DateTime posting;
 
     @NonNull
+    @Column(name = "Value Date", order = 1)
     final DateTime valueDate;
 
     @NonNull
+    @Column(name = "Process", order = 2)
     final String process;
 
     @NonNull
+    @Column(name = "Text", order = 3)
     final String text;
 
     @NonNull
+    @Column(name = "Fluctuation", order = 4)
     final float fluctuation;
 
+    @Column(name = "Category", order = 5)
     Category category;
 
     @Override

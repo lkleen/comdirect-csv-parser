@@ -16,6 +16,8 @@ public @interface Column {
 
     String name();
 
-    int width() default ColumnData.defaultWidth;
+    int width() default ColumnData.DEFAULT_WIDTH;
+
+    int order() default ColumnData.DEFAULT_ORDER;
 
 }
