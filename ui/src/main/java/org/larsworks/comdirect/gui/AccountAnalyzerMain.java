@@ -3,8 +3,7 @@ package org.larsworks.comdirect.gui;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import org.larsworks.comdirect.gui.configuration.GuiConfiguration;
-import org.larsworks.comdirect.gui.windows.MainWindow;
+import org.larsworks.comdirect.gui.configuration.spring.GuiConfiguration;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 

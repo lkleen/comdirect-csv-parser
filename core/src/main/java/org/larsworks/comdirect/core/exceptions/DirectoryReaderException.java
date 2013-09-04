@@ -2,11 +2,11 @@ package org.larsworks.comdirect.core.exceptions;
 
 /**
  * @author Lars Kleen
- * @since ?version
+ * @since 0.0.1
  *        Date: 26.05.13
  *        Time: 16:10
  */
-public class DirectoryReaderException extends CsvParserException {
+public class DirectoryReaderException extends AccountDataAnalyzerIOException {
     public DirectoryReaderException(String message) {
         super(message);
     }

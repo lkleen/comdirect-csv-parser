@@ -6,7 +6,7 @@ package org.larsworks.comdirect.core.exceptions;
  *        Date: 25.08.13
  *        Time: 12:29
  */
-public class TextFileReaderException extends CsvParserException {
+public class TextFileReaderException extends AccountDataAnalyzerIOException {
     public TextFileReaderException(String message, Throwable cause) {
         super(message, cause);
     }

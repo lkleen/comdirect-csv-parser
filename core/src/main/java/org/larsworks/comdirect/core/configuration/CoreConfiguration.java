@@ -6,9 +6,8 @@ import org.joda.time.format.DateTimeFormatter;
 import org.larsworks.comdirect.core.controllers.AccountDataAnalyzer;
 import org.larsworks.comdirect.core.controllers.AccountDataMerger;
 import org.larsworks.comdirect.core.controllers.CategoryManager;
-import org.larsworks.comdirect.core.io.DirReader;
-import org.larsworks.comdirect.core.io.FileWriter;
-import org.larsworks.comdirect.core.io.TextFileReader;
+import org.larsworks.comdirect.core.io.*;
+import org.larsworks.comdirect.core.model.AccountData;
 import org.larsworks.comdirect.core.parser.*;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
@@ -112,6 +111,17 @@ public class CoreConfiguration {
     @Bean
     public AccountDataAnalyzer accountDataAnalyzer() {
         return new AccountDataAnalyzer();
+    }
+
+    @Bean
+    @Named("accountDataXmlIO")
+    public XmlIO<AccountData> accountDataXmlIO() {
+        return new XmlIO<AccountData>(AccountData.class);
+    }
+
+    @Bean
+    public FileHandler fileHandler() {
+        return new FileHandler();
     }
 
 }

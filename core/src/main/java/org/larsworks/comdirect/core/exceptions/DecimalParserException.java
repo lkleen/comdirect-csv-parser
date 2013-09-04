@@ -7,7 +7,7 @@ package org.larsworks.comdirect.core.exceptions;
  * @author lkleen
  * @version 0.0.1
  */
-public class DecimalParserException extends CsvParserException {
+public class DecimalParserException extends AccountDataAnalyzerException {
     public DecimalParserException(Throwable cause) {
         super(cause);
     }

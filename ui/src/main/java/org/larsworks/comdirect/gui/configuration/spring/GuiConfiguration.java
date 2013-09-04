@@ -1,8 +1,9 @@
-package org.larsworks.comdirect.gui.configuration;
+package org.larsworks.comdirect.gui.configuration.spring;
 
 import javafx.scene.Scene;
-import javafx.stage.Stage;
 import org.larsworks.comdirect.core.configuration.CoreConfiguration;
+import org.larsworks.comdirect.core.io.XmlIO;
+import org.larsworks.comdirect.gui.configuration.app.ApplicationConfigurationIO;
 import org.larsworks.comdirect.gui.windows.MainWindow;
 import org.larsworks.comdirect.gui.windows.PreferencesWindow;
 import org.larsworks.comdirect.gui.windows.main.charts.LineChartDataGenerator;
@@ -15,9 +16,10 @@ import org.larsworks.comdirect.gui.windows.main.menu.file.PreferencesAction;
 import org.larsworks.comdirect.gui.windows.preferences.controller.PreferencesWindowController;
 import org.larsworks.comdirect.gui.windows.preferences.handler.CategoriesKeyEventHandler;
 import org.larsworks.comdirect.gui.windows.preferences.handler.CategoriesTableViewHandler;
-import org.larsworks.comdirect.gui.windows.preferences.initializer.CategoriesTableViewInitializer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+
+import javax.inject.Named;
 
 /**
  * @author Lars Kleen
@@ -91,5 +93,16 @@ public class GuiConfiguration extends CoreConfiguration {
     @Bean
     public CategoriesKeyEventHandler categoriesKeyEventHandler() {
         return new CategoriesKeyEventHandler();
+    }
+
+    @Bean
+    @Named("applicationConfigurationXmlIO")
+    public XmlIO<ApplicationConfigurationIO> applicationConfigurationXmlIO() {
+        return new XmlIO<>(ApplicationConfigurationIO.class);
+    }
+
+    @Bean
+    public ApplicationConfigurationIO applicationConfigurationManager() {
+        return new ApplicationConfigurationIO("application.configuration.xml");
     }
 }

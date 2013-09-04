@@ -1,6 +1,6 @@
 package org.larsworks.comdirect.gui.exceptions;
 
-import org.larsworks.comdirect.core.exceptions.CsvParserException;
+import org.larsworks.comdirect.core.exceptions.AccountDataAnalyzerException;
 
 /**
  * @author Lars Kleen
@@ -8,7 +8,7 @@ import org.larsworks.comdirect.core.exceptions.CsvParserException;
  *        Date: 25.08.13
  *        Time: 13:33
  */
-public abstract class AbstractGuiException extends CsvParserException {
+public abstract class AbstractGuiException extends AccountDataAnalyzerException {
     public AbstractGuiException(String message) {
         super(message);
     }

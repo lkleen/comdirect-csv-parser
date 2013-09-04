@@ -1,7 +1,5 @@
 package org.larsworks.comdirect.gui.exceptions;
 
-import org.larsworks.comdirect.core.exceptions.CsvParserException;
-
 /**
  * @author Lars Kleen
  * @since 0.0.1
