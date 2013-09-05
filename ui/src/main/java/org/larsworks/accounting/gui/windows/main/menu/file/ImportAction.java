@@ -7,6 +7,7 @@ import org.larsworks.accounting.core.io.DirReader;
 import org.larsworks.accounting.core.io.TextFile;
 import org.larsworks.accounting.core.model.AccountData;
 import org.larsworks.accounting.core.parser.AccountDataParser;
+import org.larsworks.accounting.core.storage.AccountDataCache;
 import org.larsworks.accounting.gui.configuration.app.ApplicationConfiguration;
 import org.larsworks.accounting.gui.configuration.app.ApplicationConfigurationManager;
 import org.larsworks.accounting.gui.windows.main.controller.MainWindowController;
@@ -58,10 +59,14 @@ public class ImportAction extends FileChooserAction {
     @Inject
     private ApplicationConfigurationManager configurationManager;
 
+    @Inject
+    private AccountDataCache accountDataCache;
+
     @Override
     public void execute() {
         List<AccountData> accountDataList = parseFilesFrom(showDialog());
         AccountData accountData = merge(accountDataList);
+        accountDataCache.setAccountData(accountData);
         updateTableViewWith(accountData);
         updateLineChartWith(accountData);
         updateBarChartWith(accountData);

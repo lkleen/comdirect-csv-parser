@@ -1,6 +1,8 @@
 package org.larsworks.accounting.core.statistics;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.larsworks.accounting.core.annotations.view.Column;
 
 /**
@@ -10,10 +12,12 @@ import org.larsworks.accounting.core.annotations.view.Column;
  *        Time: 17:33
  */
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class Category implements Comparable<Category> {
 
     @Column(name = "Category", width = 250)
-    private final String category;
+    private String category;
 
     @Override
     public int compareTo(Category that) {

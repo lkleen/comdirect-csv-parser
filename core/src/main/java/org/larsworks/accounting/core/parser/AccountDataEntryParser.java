@@ -40,14 +40,12 @@ public class AccountDataEntryParser extends AbstractParser<SortedSet<AccountData
         List<String> tokens = tokenizer.tokenize(line);
         if (tokens.size() == NUM_ENTRY_TOKENS) {
             try {
-                AccountDataEntry entry = new AccountDataEntry(
-                        dateTimeParser.parse(tokens.get(INDEX_POSTING)),
-                        dateTimeParser.parse(tokens.get(INDEX_VALUE_DATE)),
-                        tokens.get(INDEX_PROCESS),
-                        tokens.get(INDEX_TEXT),
-                        decimalParser.parse(tokens.get(INDEX_FLUCTUATION))
-                );
-
+                AccountDataEntry entry = new AccountDataEntry();
+                entry.setPosting(dateTimeParser.parse(tokens.get(INDEX_POSTING)));
+                entry.setValueDate(dateTimeParser.parse(tokens.get(INDEX_VALUE_DATE)));
+                entry.setProcess(tokens.get(INDEX_PROCESS));
+                entry.setText(tokens.get(INDEX_TEXT));
+                entry.setFluctuation(decimalParser.parse(tokens.get(INDEX_FLUCTUATION)));
                 data.add(entry);
             } catch (Exception e) {
                 AccountDataEntryParser.log.debug("could not parse line: " + line);

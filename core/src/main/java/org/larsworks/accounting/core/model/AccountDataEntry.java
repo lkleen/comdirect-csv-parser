@@ -1,6 +1,8 @@
 package org.larsworks.accounting.core.model;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import org.joda.time.DateTime;
 import org.larsworks.accounting.core.annotations.view.Column;
@@ -28,26 +30,29 @@ public class AccountDataEntry implements Comparable<AccountDataEntry> {
 
     @NonNull
     @Column(name = "Posting", order = 0)
-    final DateTime posting;
+    DateTime posting;
 
     @NonNull
     @Column(name = "Value Date", order = 1)
-    final DateTime valueDate;
+    DateTime valueDate;
 
     @NonNull
     @Column(name = "Process", order = 2)
-    final String process;
+    String process;
 
     @NonNull
     @Column(name = "Text", order = 3)
-    final String text;
+    String text;
 
     @NonNull
     @Column(name = "Fluctuation", order = 4)
-    final float fluctuation;
+    float fluctuation;
 
     @Column(name = "Category", order = 5)
     Category category;
+
+    public AccountDataEntry() {
+    }
 
     @Override
     public int compareTo(AccountDataEntry that) {

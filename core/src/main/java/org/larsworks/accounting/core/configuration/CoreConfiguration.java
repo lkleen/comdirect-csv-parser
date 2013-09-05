@@ -8,6 +8,7 @@ import org.larsworks.accounting.core.controllers.AccountDataMerger;
 import org.larsworks.accounting.core.controllers.CategoryManager;
 import org.larsworks.accounting.core.io.*;
 import org.larsworks.accounting.core.model.AccountData;
+import org.larsworks.accounting.core.storage.AccountDataCache;
 import org.larsworks.accounting.core.parser.*;
 import org.larsworks.accounting.core.storage.AccountDataStorage;
 import org.springframework.context.annotation.Bean;
@@ -127,6 +128,11 @@ public class CoreConfiguration {
     @Bean
     public AccountDataStorage accountDataStorage() {
         return new AccountDataStorage();
+    }
+
+    @Bean
+    public AccountDataCache accountDataService() {
+        return new AccountDataCache();
     }
 
 }

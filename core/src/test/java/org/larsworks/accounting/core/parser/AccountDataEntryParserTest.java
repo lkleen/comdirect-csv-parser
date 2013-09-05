@@ -48,7 +48,7 @@ public class AccountDataEntryParserTest extends AbstractCoreTest {
                         Charset.forName(CHARSET)
                 );
         TextFile file = tfr.call();
-        for(TextLine line :file.getLines()) {
+        for (TextLine line : file.getLines()) {
             if (line.getText() != null && line.getText().length() > 0) {
                 expected.add(createEntry(line));
             }
@@ -65,16 +65,16 @@ public class AccountDataEntryParserTest extends AbstractCoreTest {
 
     private AccountDataEntry createEntry(TextLine line) throws Exception {
         String[] tokens = line.split(";");
-        for(int i = 0; i < tokens.length; i++) {
+        for (int i = 0; i < tokens.length; i++) {
             tokens[i] = tokens[i].replaceAll("\"", "");
         }
-        return new AccountDataEntry(
-                parser.parse(tokens[0]),
-                parser.parse(tokens[1]),
-                tokens[2],
-                tokens[3],
-                format.parse(tokens[4]).floatValue()
-        );
+        AccountDataEntry entry = new AccountDataEntry();
+        entry.setPosting(parser.parse(tokens[0]));
+        entry.setValueDate(parser.parse(tokens[1]));
+        entry.setProcess(tokens[2]);
+        entry.setText(tokens[3]);
+        entry.setFluctuation(format.parse(tokens[4]).floatValue());
+        return entry;
     }
 
 }

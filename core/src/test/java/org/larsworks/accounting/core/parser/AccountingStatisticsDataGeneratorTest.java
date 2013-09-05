@@ -79,6 +79,12 @@ public class AccountingStatisticsDataGeneratorTest {
     }
 
     private AccountDataEntry newEntry(DateTime valueDate, float fluctuation) {
-        return new AccountDataEntry(valueDate, valueDate, "", "", fluctuation);
+        AccountDataEntry entry = new AccountDataEntry();
+        entry.setPosting(valueDate);
+        entry.setValueDate(valueDate);
+        entry.setProcess("");
+        entry.setText("");
+        entry.setFluctuation(fluctuation);
+        return entry;
     }
 }
