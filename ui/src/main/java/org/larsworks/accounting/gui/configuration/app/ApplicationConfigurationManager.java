@@ -11,19 +11,20 @@ import javax.inject.Inject;
 public class ApplicationConfigurationManager {
 
     @Inject
-    private ApplicationConfigurationIO applicationConfigurationIO;
+    private ApplicationConfigurationStorage applicationConfigurationStorage;
 
     private ApplicationConfiguration applicationConfiguration;
 
-    public ApplicationConfiguration getApplicationConfiguration() {
+    public ApplicationConfiguration get() {
         if(applicationConfiguration == null) {
-            applicationConfiguration = applicationConfigurationIO.load();
+            applicationConfiguration = applicationConfigurationStorage.load();
         }
         return applicationConfiguration;
     }
 
     public void set(ApplicationConfiguration applicationConfiguration) {
-        applicationConfigurationIO.save(applicationConfiguration);
+        this.applicationConfiguration = applicationConfiguration;
+        applicationConfigurationStorage.store(applicationConfiguration);
     }
 
 

@@ -3,7 +3,8 @@ package org.larsworks.accounting.gui.configuration.spring;
 import javafx.scene.Scene;
 import org.larsworks.accounting.core.configuration.CoreConfiguration;
 import org.larsworks.accounting.core.io.XmlIO;
-import org.larsworks.accounting.gui.configuration.app.ApplicationConfigurationIO;
+import org.larsworks.accounting.gui.configuration.app.ApplicationConfigurationStorage;
+import org.larsworks.accounting.gui.configuration.app.ApplicationConfigurationManager;
 import org.larsworks.accounting.gui.windows.MainWindow;
 import org.larsworks.accounting.gui.windows.PreferencesWindow;
 import org.larsworks.accounting.gui.windows.main.charts.LineChartDataGenerator;
@@ -97,12 +98,19 @@ public class GuiConfiguration extends CoreConfiguration {
 
     @Bean
     @Named("applicationConfigurationXmlIO")
-    public XmlIO<ApplicationConfigurationIO> applicationConfigurationXmlIO() {
-        return new XmlIO<>(ApplicationConfigurationIO.class);
+    public XmlIO<ApplicationConfigurationStorage> applicationConfigurationXmlIO() {
+        return new XmlIO<>(ApplicationConfigurationStorage.class);
     }
 
     @Bean
-    public ApplicationConfigurationIO applicationConfigurationManager() {
-        return new ApplicationConfigurationIO("application.configuration.xml");
+    public ApplicationConfigurationStorage applicationConfigurationIO() {
+        return new ApplicationConfigurationStorage("application.configuration.xml");
     }
+
+    @Bean
+    public ApplicationConfigurationManager applicationConfigurationManager() {
+        return new ApplicationConfigurationManager();
+    }
+
 }
+

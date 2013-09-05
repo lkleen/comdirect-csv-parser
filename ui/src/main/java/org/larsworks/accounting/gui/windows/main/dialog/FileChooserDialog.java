@@ -21,6 +21,10 @@ public class FileChooserDialog extends Dialog<File> {
         builder.title("choose import file");
     }
 
+    public void intitialDirectory(File dir) {
+        builder.initialDirectory(dir);
+    }
+
     @Override
     public File show() {
         return builder.build().showOpenDialog(window);

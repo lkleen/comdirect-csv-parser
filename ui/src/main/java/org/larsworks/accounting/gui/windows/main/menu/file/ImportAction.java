@@ -5,12 +5,15 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import lombok.extern.slf4j.Slf4j;
 import org.larsworks.accounting.core.io.CsvFileFilter;
 import org.larsworks.accounting.core.io.DirReader;
 import org.larsworks.accounting.core.io.TextFile;
 import org.larsworks.accounting.core.model.AccountData;
 import org.larsworks.accounting.core.controllers.AccountDataMerger;
 import org.larsworks.accounting.core.parser.AccountDataParser;
+import org.larsworks.accounting.gui.configuration.app.ApplicationConfiguration;
+import org.larsworks.accounting.gui.configuration.app.ApplicationConfigurationManager;
 import org.larsworks.accounting.gui.windows.main.controller.MainWindowController;
 import org.larsworks.accounting.gui.windows.main.dialog.FileChooserDialog;
 import org.larsworks.accounting.gui.windows.main.handler.AccountDataBarChartHandler;
@@ -27,6 +30,7 @@ import javax.inject.Named;
  * @author lkleen
  * @version 0.0.1
  */
+@Slf4j
 public class ImportAction extends MenuItemAction {
 
     @Inject
@@ -50,6 +54,9 @@ public class ImportAction extends MenuItemAction {
 
     @Inject
     private AccountDataMerger merger;
+
+    @Inject
+    private ApplicationConfigurationManager configurationManager;
 
     @Override
     public void execute() {
@@ -90,6 +97,18 @@ public class ImportAction extends MenuItemAction {
 
     private File getPath() {
         FileChooserDialog dialog = new FileChooserDialog(controller.getMainPane().getScene().getWindow());
-        return dialog.show();
+        ApplicationConfiguration configuration = configurationManager.get();
+        File lastImportDir = configuration.getLastImportLocation();
+        if(lastImportDir != null && lastImportDir.isDirectory()) {
+            dialog.intitialDirectory(lastImportDir);
+        } else {
+            log.warn("tried to open dialog with invalid initial directory: " + lastImportDir);
+        }
+        File file  = dialog.show();
+        if(file != null) {
+            configuration.setLastImportLocation(file.getParentFile());
+            configurationManager.set(configuration);
+        }
+        return file;
     }
 }
