@@ -2,6 +2,7 @@ package org.larsworks.accounting.gui.windows.main.dialog;
 
 import javafx.stage.FileChooserBuilder;
 import javafx.stage.Window;
+import lombok.extern.slf4j.Slf4j;
 
 import java.io.File;
 
@@ -11,9 +12,10 @@ import java.io.File;
  * Date: 28.08.13
  * Time: 19:20
  */
-public class FileChooserDialog extends Dialog<File> {
+@Slf4j
+public abstract class FileChooserDialog extends Dialog<File> {
 
-    private final FileChooserBuilder builder;
+    protected final FileChooserBuilder builder;
 
     public FileChooserDialog(Window window) {
         super(window);
@@ -21,12 +23,15 @@ public class FileChooserDialog extends Dialog<File> {
         builder.title("choose import file");
     }
 
-    public void intitialDirectory(File dir) {
-        builder.initialDirectory(dir);
-    }
-
     @Override
-    public File show() {
-        return builder.build().showOpenDialog(window);
+    public abstract File show();
+
+    public File showWith(File initialDirectory) {
+        if(initialDirectory != null && initialDirectory.isDirectory()) {
+            builder.initialDirectory(initialDirectory);
+        } else {
+            log.warn("tried to open dialog with invalid initial directory: " + initialDirectory);
+        }
+        return show();
     }
 }

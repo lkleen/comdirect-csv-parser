@@ -1,5 +1,7 @@
 package org.larsworks.accounting.gui.configuration.app;
 
+import org.larsworks.accounting.gui.storage.ApplicationConfigurationStorage;
+
 import javax.inject.Inject;
 
 /**

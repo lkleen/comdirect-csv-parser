@@ -14,7 +14,7 @@
         <Menu id="menu-file" mnemonicParsing="false" text="File">
           <items>
             <MenuItem id="menu-file-open" mnemonicParsing="false" text="Open" />
-            <MenuItem id="menu-file-close" mnemonicParsing="false" text="Close" />
+            <MenuItem id="menu-file-save" mnemonicParsing="false" onAction="#save" text="Save" />
             <MenuItem id="menu-file-import" mnemonicParsing="false" onAction="#importData" text="Import"/>
             <MenuItem id="menu-file-preferences" mnemonicParsing="false" onAction="#preferences" text="Preferences" />
           </items>

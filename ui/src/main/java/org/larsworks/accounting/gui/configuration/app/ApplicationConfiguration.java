@@ -15,4 +15,8 @@ public class ApplicationConfiguration {
 
     File lastImportLocation;
 
+    File lastLoadLocation;
+
+    File lastSaveLocation;
+
 }

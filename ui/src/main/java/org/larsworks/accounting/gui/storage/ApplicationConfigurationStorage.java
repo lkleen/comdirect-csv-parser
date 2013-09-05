@@ -1,9 +1,10 @@
-package org.larsworks.accounting.gui.configuration.app;
+package org.larsworks.accounting.gui.storage;
 
 import lombok.extern.slf4j.Slf4j;
 import org.larsworks.accounting.core.io.FileHandler;
 import org.larsworks.accounting.core.io.XmlIO;
 import org.larsworks.accounting.core.storage.AbstractXmlStorage;
+import org.larsworks.accounting.gui.configuration.app.ApplicationConfiguration;
 
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -21,13 +22,6 @@ public class ApplicationConfigurationStorage extends AbstractXmlStorage<Applicat
     @Inject
     @Named("applicationConfigurationXmlIO")
     private XmlIO<ApplicationConfiguration> xmlIO;
-
-    @Inject
-    private FileHandler fileHandler;
-
-    public ApplicationConfigurationStorage(String filename) {
-        super(filename);
-    }
 
     @Override
     protected XmlIO<ApplicationConfiguration> getXmlIO() {

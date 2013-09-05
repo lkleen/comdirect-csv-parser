@@ -18,6 +18,7 @@ import org.larsworks.accounting.gui.windows.main.initializer.AccountDataBarChart
 import org.larsworks.accounting.gui.windows.main.initializer.AccountDataTableViewInitializer;
 import org.larsworks.accounting.gui.windows.main.menu.file.ImportAction;
 import org.larsworks.accounting.gui.windows.main.menu.file.PreferencesAction;
+import org.larsworks.accounting.gui.windows.main.menu.file.SaveAction;
 
 import javax.inject.Inject;
 
@@ -51,6 +52,9 @@ public class MainWindowController implements Initializable {
     private ImportAction importAction;
 
     @Inject
+    private SaveAction saveAction;
+
+    @Inject
     private PreferencesAction preferencesAction;
 
     @Inject
@@ -74,6 +78,11 @@ public class MainWindowController implements Initializable {
     @FXML
     public void importData(ActionEvent event) {
         importAction.execute();
+    }
+
+    @FXML
+    public void save(ActionEvent event) {
+        saveAction.execute();
     }
 
     @FXML

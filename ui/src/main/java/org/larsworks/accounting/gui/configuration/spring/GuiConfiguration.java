@@ -3,7 +3,7 @@ package org.larsworks.accounting.gui.configuration.spring;
 import javafx.scene.Scene;
 import org.larsworks.accounting.core.configuration.CoreConfiguration;
 import org.larsworks.accounting.core.io.XmlIO;
-import org.larsworks.accounting.gui.configuration.app.ApplicationConfigurationStorage;
+import org.larsworks.accounting.gui.storage.ApplicationConfigurationStorage;
 import org.larsworks.accounting.gui.configuration.app.ApplicationConfigurationManager;
 import org.larsworks.accounting.gui.windows.MainWindow;
 import org.larsworks.accounting.gui.windows.PreferencesWindow;
@@ -14,6 +14,7 @@ import org.larsworks.accounting.gui.windows.main.handler.AccountDataLineChartHan
 import org.larsworks.accounting.gui.windows.main.handler.AccountDataTableViewHandler;
 import org.larsworks.accounting.gui.windows.main.menu.file.ImportAction;
 import org.larsworks.accounting.gui.windows.main.menu.file.PreferencesAction;
+import org.larsworks.accounting.gui.windows.main.menu.file.SaveAction;
 import org.larsworks.accounting.gui.windows.preferences.controller.PreferencesWindowController;
 import org.larsworks.accounting.gui.windows.preferences.handler.CategoriesKeyEventHandler;
 import org.larsworks.accounting.gui.windows.preferences.handler.CategoriesTableViewHandler;
@@ -21,6 +22,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import javax.inject.Named;
+import java.io.File;
 
 /**
  * @author Lars Kleen
@@ -67,6 +69,11 @@ public class GuiConfiguration extends CoreConfiguration {
     }
 
     @Bean
+    public SaveAction saveAction() {
+        return new SaveAction();
+    }
+
+    @Bean
     public PreferencesAction preferencesAction() {
         return new PreferencesAction();
     }
@@ -104,7 +111,9 @@ public class GuiConfiguration extends CoreConfiguration {
 
     @Bean
     public ApplicationConfigurationStorage applicationConfigurationIO() {
-        return new ApplicationConfigurationStorage("application.configuration.xml");
+        ApplicationConfigurationStorage storage = new ApplicationConfigurationStorage();
+        storage.setFile(new File("application.configuration.xml"));
+        return storage;
     }
 
     @Bean

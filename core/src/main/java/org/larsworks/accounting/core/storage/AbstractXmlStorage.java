@@ -5,6 +5,7 @@ import org.larsworks.accounting.core.io.FileHandler;
 import org.larsworks.accounting.core.io.XmlIO;
 
 import javax.inject.Inject;
+import java.io.File;
 
 /**
  * @author Lars Kleen
@@ -15,28 +16,28 @@ import javax.inject.Inject;
 @Slf4j
 public abstract class AbstractXmlStorage<T> implements Storage<T> {
 
-    private final String filename;
+    private File file;
 
     @Inject
     public FileHandler fileHandler;
 
-    protected AbstractXmlStorage(String filename) {
-        this.filename = filename;
+    public void setFile(File file) {
+        this.file = file;
     }
 
     @Override
     public T load() {
         try {
-            return getXmlIO().reader().read(fileHandler.readFrom(filename));
+            return getXmlIO().reader().read(fileHandler.readFrom(file));
         } catch (Exception e) {
-            log.info("could not read from file " + filename + " new configuration file created");
+            log.info("could not read from file " + file + " new configuration file created");
             return emptyInstance();
         }
     }
 
     @Override
     public void store(T data) {
-        getXmlIO().writer().write(fileHandler.writeTo(filename), data);
+        getXmlIO().writer().write(fileHandler.writeTo(file), data);
     }
 
     protected abstract XmlIO<T> getXmlIO();

@@ -1,27 +1,27 @@
 package org.larsworks.accounting.gui.windows.main.menu.file;
 
-import java.io.File;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-
 import lombok.extern.slf4j.Slf4j;
+import org.larsworks.accounting.core.controllers.AccountDataMerger;
 import org.larsworks.accounting.core.io.CsvFileFilter;
 import org.larsworks.accounting.core.io.DirReader;
 import org.larsworks.accounting.core.io.TextFile;
 import org.larsworks.accounting.core.model.AccountData;
-import org.larsworks.accounting.core.controllers.AccountDataMerger;
 import org.larsworks.accounting.core.parser.AccountDataParser;
 import org.larsworks.accounting.gui.configuration.app.ApplicationConfiguration;
 import org.larsworks.accounting.gui.configuration.app.ApplicationConfigurationManager;
 import org.larsworks.accounting.gui.windows.main.controller.MainWindowController;
 import org.larsworks.accounting.gui.windows.main.dialog.FileChooserDialog;
+import org.larsworks.accounting.gui.windows.main.dialog.FileOpenDialog;
 import org.larsworks.accounting.gui.windows.main.handler.AccountDataBarChartHandler;
 import org.larsworks.accounting.gui.windows.main.handler.AccountDataLineChartHandler;
 import org.larsworks.accounting.gui.windows.main.handler.AccountDataTableViewHandler;
 
 import javax.inject.Inject;
 import javax.inject.Named;
+import java.io.File;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 /**
  * Date: 7/23/13
@@ -31,7 +31,7 @@ import javax.inject.Named;
  * @version 0.0.1
  */
 @Slf4j
-public class ImportAction extends MenuItemAction {
+public class ImportAction extends FileChooserAction {
 
     @Inject
     private MainWindowController controller;
@@ -60,7 +60,7 @@ public class ImportAction extends MenuItemAction {
 
     @Override
     public void execute() {
-        List<AccountData> accountDataList = parseFilesFrom(getPath());
+        List<AccountData> accountDataList = parseFilesFrom(showDialog());
         AccountData accountData = merge(accountDataList);
         updateTableViewWith(accountData);
         updateLineChartWith(accountData);
@@ -84,31 +84,34 @@ public class ImportAction extends MenuItemAction {
     }
 
     private List<AccountData> parseFilesFrom(File dir) {
-        if(dir == null) {
+        if (dir == null) {
             return Collections.emptyList();
         }
         List<TextFile> files = dirReader.readDir(dir.getAbsolutePath(), new CsvFileFilter());
         List<AccountData> accountDatas = new ArrayList<AccountData>(files.size());
-        for(TextFile file : files) {
+        for (TextFile file : files) {
             accountDatas.add(parser.parse(file));
         }
         return accountDatas;
     }
 
-    private File getPath() {
-        FileChooserDialog dialog = new FileChooserDialog(controller.getMainPane().getScene().getWindow());
+    @Override
+    protected FileChooserDialog getDialog() {
+        return new FileOpenDialog(controller.getMainPane().getScene().getWindow());
+    }
+
+    @Override
+    protected File getLastDir() {
         ApplicationConfiguration configuration = configurationManager.get();
-        File lastImportDir = configuration.getLastImportLocation();
-        if(lastImportDir != null && lastImportDir.isDirectory()) {
-            dialog.intitialDirectory(lastImportDir);
-        } else {
-            log.warn("tried to open dialog with invalid initial directory: " + lastImportDir);
-        }
-        File file  = dialog.show();
-        if(file != null) {
+        return configuration.getLastImportLocation();
+    }
+
+    @Override
+    protected void setLastDir(File file) {
+        if (file != null && file.isFile()) {
+            ApplicationConfiguration configuration = configurationManager.get();
             configuration.setLastImportLocation(file.getParentFile());
             configurationManager.set(configuration);
         }
-        return file;
     }
 }

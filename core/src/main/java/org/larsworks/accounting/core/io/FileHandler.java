@@ -13,28 +13,37 @@ import java.io.*;
 public class FileHandler {
 
     public OutputStream writeTo(String filename) {
-        File file = new File(filename);
+        return writeTo(new File(filename));
+    }
+
+    public OutputStream writeTo(File file) {
         try {
             if (!file.exists()) {
                 file.createNewFile();
             }
             return new FileOutputStream(file);
         } catch (Exception e) {
-            throw new FileHandlerException("could not open file " + filename, e);
+            throw new FileHandlerException("could not open file " + file.getAbsolutePath(), e);
         }
     }
 
     public InputStream readFrom(String filename) {
+        return readFrom(new File(filename));
+    }
+
+    public InputStream readFrom(File file) {
         try {
-            File file = new File(filename);
             if(!file.exists()) {
-                throw new FileHandlerException("file does not exist: " + filename);
+                throw new FileHandlerException("file does not exist: " + file.getAbsolutePath());
             } else {
                 return new FileInputStream(file);
             }
         } catch (Exception e) {
-            throw new FileHandlerException("could not read from file " + filename, e );
+            throw new FileHandlerException("could not read from file " + file.getAbsolutePath(), e );
         }
     }
+
+
+
 
 }

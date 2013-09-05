@@ -9,6 +9,7 @@ import org.larsworks.accounting.core.controllers.CategoryManager;
 import org.larsworks.accounting.core.io.*;
 import org.larsworks.accounting.core.model.AccountData;
 import org.larsworks.accounting.core.parser.*;
+import org.larsworks.accounting.core.storage.AccountDataStorage;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -121,6 +122,11 @@ public class CoreConfiguration {
     @Bean
     public FileHandler fileHandler() {
         return new FileHandler();
+    }
+
+    @Bean
+    public AccountDataStorage accountDataStorage() {
+        return new AccountDataStorage();
     }
 
 }
