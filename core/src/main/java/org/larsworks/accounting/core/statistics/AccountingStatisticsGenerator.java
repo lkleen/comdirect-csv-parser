@@ -1,7 +1,7 @@
 package org.larsworks.accounting.core.statistics;
 
 import org.joda.time.DateTime;
-import org.larsworks.accounting.core.model.*;
+import org.larsworks.accounting.core.model.AccountData;
 import org.larsworks.accounting.core.model.AccountDataEntry;
 
 import java.util.*;

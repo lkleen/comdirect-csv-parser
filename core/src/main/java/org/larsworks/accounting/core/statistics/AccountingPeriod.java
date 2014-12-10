@@ -25,6 +25,12 @@ public class AccountingPeriod implements Comparable<AccountingPeriod> {
     @NonNull
     final SortedSet<Deposit> deposits;
 
+    public AccountingPeriod(DateTime.Property month, SortedSet<Withdraw> withdraws, SortedSet<Deposit> deposits) {
+        this.month = month;
+        this.withdraws = withdraws;
+        this.deposits = deposits;
+    }
+
     @Override
     public int compareTo(AccountingPeriod that) {
         return this.month.getDateTime().compareTo(that.month.getDateTime());
